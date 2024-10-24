@@ -1,52 +1,48 @@
-package com.example.eventposter.app.ui.home
+package com.example.eventposter.app.ui.event.search
 
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.eventposter.app.ui.adapters.recycler.EventAdapter
-import com.example.eventposter.databinding.FragmentHomeBinding
+import com.example.eventposter.databinding.FragmentEventsSearchBinding
 import com.example.eventposter.domain.EventModel
 import java.util.Calendar
 
-class HomeFragment : Fragment() {
+class EventsSearchFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentEventsSearchBinding? = null
     private val binding get() = _binding!!
 
     companion object {
-        private var fragment: HomeFragment? = null
-        fun getInstance(): HomeFragment {
+        private var fragment: EventsSearchFragment? = null
+        fun getInstance(): EventsSearchFragment {
             if (fragment == null) {
-                fragment = HomeFragment()
+                fragment = EventsSearchFragment()
             }
             return fragment!!
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val homeViewModel =
-            ViewModelProvider(this)[HomeViewModel::class.java]
+    private lateinit var viewModel: EventsSearchViewModel
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        viewModel = ViewModelProvider(this)[EventsSearchViewModel::class.java]
+        _binding = FragmentEventsSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val recyclerView = binding.posterPreviews
-
+        val recyclerView = binding.rvEventSearchResult
         val adapter = EventAdapter(requireContext())
+
         adapter.events.add(
             EventModel(
-            "Новый год на Красной Площади",
-            "г. Чебоксары, Красная Площадь",
+                "Новый год на Красной Площади",
+                "г. Чебоксары, Красная Площадь",
                 Calendar.getInstance().time,
                 Calendar.getInstance().time,
                 "https://fs01.cap.ru/www22-09/gcheb/news/2023/01/18/9d4048df-fdf8-4300-a022-336e28ccc8f1/zaliv.jpg"
@@ -79,14 +75,10 @@ class HomeFragment : Fragment() {
                 null
             )
         )
+
         recyclerView.adapter = adapter
 
         return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

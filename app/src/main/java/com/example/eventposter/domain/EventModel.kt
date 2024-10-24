@@ -2,7 +2,7 @@ package com.example.eventposter.domain
 
 import java.util.Date
 
-class EventModel(
+data class EventModel(
      val name: String,
      val address: String,
      val startDate: Date,

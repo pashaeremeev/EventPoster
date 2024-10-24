@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".app.ui.friend.search.FriendSearchFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFriendsSearchResult"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_friend_search"
+        android:orientation="vertical"/>
+
+</FrameLayout>

@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eventposter.R
 
-class PosterPreviewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class EventHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     private var posterPreviewImage: ImageView
     private val posterPreviewEventNameText: TextView
@@ -24,27 +24,15 @@ class PosterPreviewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         posterPreviewEventDateTimeText = itemView.findViewById(R.id.poster_preview_event_datetime_text)
     }
 
-    fun getPosterPreviewImage(): ImageView {
-        return posterPreviewImage
-    }
+    fun getPosterPreviewImage() = posterPreviewImage
 
-    fun getPosterPreviewEventNameText(): TextView {
-        return posterPreviewEventNameText
-    }
+    fun getPosterPreviewEventNameText() = posterPreviewEventNameText
 
-    fun getPosterPreviewIvLocation(): ImageView {
-        return posterPreviewIvLocation
-    }
+    fun getPosterPreviewIvLocation() = posterPreviewIvLocation
 
-    fun getPosterPreviewEventLocationText(): TextView {
-        return posterPreviewEventLocationText
-    }
+    fun getPosterPreviewEventLocationText() = posterPreviewEventLocationText
 
-    fun getPosterPreviewIvDateTime(): ImageView {
-        return posterPreviewIvDateTime
-    }
+    fun getPosterPreviewIvDateTime() = posterPreviewIvDateTime
 
-    fun getPosterPreviewEventDateTimeText(): TextView {
-        return posterPreviewEventDateTimeText
-    }
+    fun getPosterPreviewEventDateTimeText() = posterPreviewEventDateTimeText
 }

@@ -8,6 +8,7 @@ import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.eventposter.app.DialogManager
+import com.example.eventposter.app.ui.home.HomeFragment
 import com.example.eventposter.databinding.FragmentProfileBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -39,6 +41,16 @@ class ProfileFragment : Fragment() {
     }
 
     private val binding get() = _binding!!
+
+    companion object {
+        private var fragment: ProfileFragment? = null
+        fun getInstance(): ProfileFragment {
+            if (fragment == null) {
+                fragment = ProfileFragment()
+            }
+            return fragment!!
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -134,5 +146,10 @@ class ProfileFragment : Fragment() {
                 vm.location.value = it.result
             }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
 
 }

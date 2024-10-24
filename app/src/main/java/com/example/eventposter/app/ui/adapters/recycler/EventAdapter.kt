@@ -1,4 +1,4 @@
-package com.example.eventposter.app.ui.adapters
+package com.example.eventposter.app.ui.adapters.recycler
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,25 +6,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.eventposter.R
-import com.example.eventposter.app.ui.viewholders.PosterPreviewHolder
+import com.example.eventposter.app.ui.viewholders.EventHolder
 import com.example.eventposter.domain.EventModel
 
-class PosterPreviewAdapter(
-    context: Context
-): RecyclerView.Adapter<PosterPreviewHolder?>() {
+class EventAdapter(
+    private val context: Context
+): RecyclerView.Adapter<EventHolder?>() {
 
     var events: ArrayList<EventModel> = arrayListOf()
         set(value) {
             field = value
         }
-    private val context: Context
 
-    init {
-        this.context = context
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosterPreviewHolder {
-        return PosterPreviewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventHolder {
+        return EventHolder(
             LayoutInflater.from(context)
                 .inflate(R.layout.item_poster_preview, parent, false)
         )
@@ -34,7 +29,7 @@ class PosterPreviewAdapter(
         return events.size
     }
 
-    override fun onBindViewHolder(holder: PosterPreviewHolder, position: Int) {
+    override fun onBindViewHolder(holder: EventHolder, position: Int) {
         val event = events[position]
         holder.getPosterPreviewEventNameText().text = event.name
         holder.getPosterPreviewEventLocationText().text = event.address
