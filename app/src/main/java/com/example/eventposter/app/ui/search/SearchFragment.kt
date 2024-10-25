@@ -46,14 +46,12 @@ class SearchFragment : Fragment() {
         val tabLayout = binding.profileScrollSearchFragments
         val viewPager = binding.profileViewPager
 
-        val adapter = PageAdapter(requireActivity().supportFragmentManager, lifecycle)
+        val adapter = PageAdapter(childFragmentManager, lifecycle)
 
-        adapter.setFragments(
-            arrayListOf(
+        adapter.fragments = arrayListOf(
                 EventsSearchFragment.getInstance(),
                 FriendSearchFragment.getInstance()
             )
-        )
 
         viewPager.adapter = adapter
 

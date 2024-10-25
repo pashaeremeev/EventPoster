@@ -1,15 +1,17 @@
 package com.example.eventposter.app.ui.event.search
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.eventposter.app.ui.adapters.recycler.EventAdapter
 import com.example.eventposter.databinding.FragmentEventsSearchBinding
 import com.example.eventposter.domain.EventModel
 import java.util.Calendar
+
 
 class EventsSearchFragment : Fragment() {
 
@@ -79,6 +81,16 @@ class EventsSearchFragment : Fragment() {
         recyclerView.adapter = adapter
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d("EventSearchFragment", "Initialized") // I don't see that in logcat
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

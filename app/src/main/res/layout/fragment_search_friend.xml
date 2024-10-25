@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".app.ui.friend.search.FriendSearchFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_friend_search"
-        android:orientation="vertical"/>
+        android:orientation="vertical"
+        app:layoutManager="LinearLayoutManager"/>
 
 </FrameLayout>

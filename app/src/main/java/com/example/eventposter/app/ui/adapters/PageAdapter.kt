@@ -11,11 +11,10 @@ class PageAdapter
     lifecycle: Lifecycle?
 ) : FragmentStateAdapter(fragmentManager!!, lifecycle!!) {
 
-    private var fragments = arrayListOf<Fragment>()
-
-    fun setFragments(value: ArrayList<Fragment>) {
-        this.fragments = value
-    }
+    var fragments = arrayListOf<Fragment>()
+        set(value) {
+            field = value
+        }
 
     override fun createFragment(position: Int): Fragment {
         return fragments[position]
