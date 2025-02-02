@@ -14,20 +14,15 @@ class EventAdapter(
 ): RecyclerView.Adapter<EventHolder?>() {
 
     var events: ArrayList<EventModel> = arrayListOf()
-        set(value) {
-            field = value
-        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventHolder {
         return EventHolder(
             LayoutInflater.from(context)
-                .inflate(R.layout.item_poster_preview, parent, false)
+                .inflate(R.layout.item_event_preview, parent, false)
         )
     }
 
-    override fun getItemCount(): Int {
-        return events.size
-    }
+    override fun getItemCount(): Int = events.size
 
     override fun onBindViewHolder(holder: EventHolder, position: Int) {
         val event = events[position]

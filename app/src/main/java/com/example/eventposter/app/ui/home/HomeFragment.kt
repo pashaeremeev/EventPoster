@@ -6,10 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.eventposter.app.ui.adapters.recycler.CalendarAdapter
 import com.example.eventposter.app.ui.adapters.recycler.EventAdapter
 import com.example.eventposter.databinding.FragmentHomeBinding
 import com.example.eventposter.domain.EventModel
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class HomeFragment : Fragment() {
 
@@ -29,6 +35,9 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private lateinit var rvEventsPreviews: RecyclerView
+    private lateinit var  rvCalendarDays: RecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,10 +49,28 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val recyclerView = binding.posterPreviews
+        rvEventsPreviews = binding.rvEventPreviews
+        rvCalendarDays = binding.rvCalendarDays
 
-        val adapter = EventAdapter(requireContext())
-        adapter.events.add(
+        val adapterCalendar = CalendarAdapter(requireContext())
+        val calendar = Calendar.getInstance()
+        val lengthOfDays = 90
+        val dates = mutableListOf<Date>()
+        for (i in 0 until lengthOfDays) {
+            dates.add(calendar.time)
+            calendar.add(Calendar.DATE, 1)
+        }
+        adapterCalendar.days = dates
+        rvCalendarDays.adapter = adapterCalendar
+        rvCalendarDays.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                updateMonthYear()
+            }
+        })
+
+        val adapterPreviews = EventAdapter(requireContext())
+        adapterPreviews.events.add(
             EventModel(
             "Новый год на Красной Площади",
             "г. Чебоксары, Красная Площадь",
@@ -52,7 +79,7 @@ class HomeFragment : Fragment() {
                 "https://fs01.cap.ru/www22-09/gcheb/news/2023/01/18/9d4048df-fdf8-4300-a022-336e28ccc8f1/zaliv.jpg"
             )
         )
-        adapter.events.add(
+        adapterPreviews.events.add(
             EventModel(
                 "Новый год на Красной Площади",
                 "г. Чебоксары, Красная Площадь",
@@ -61,7 +88,7 @@ class HomeFragment : Fragment() {
                 null
             )
         )
-        adapter.events.add(
+        adapterPreviews.events.add(
             EventModel(
                 "Новый год на Красной Площади",
                 "г. Чебоксары, Красная Площадь",
@@ -70,7 +97,7 @@ class HomeFragment : Fragment() {
                 null
             )
         )
-        adapter.events.add(
+        adapterPreviews.events.add(
             EventModel(
                 "Новый год на Красной Площади",
                 "г. Чебоксары, Красная Площадь",
@@ -79,7 +106,7 @@ class HomeFragment : Fragment() {
                 null
             )
         )
-        recyclerView.adapter = adapter
+        rvEventsPreviews.adapter = adapterPreviews
 
         return root
     }
@@ -89,4 +116,20 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    fun updateMonthYear() {
+        val lm = rvCalendarDays.layoutManager as LinearLayoutManager
+        val currentPos = lm.findFirstVisibleItemPosition()
+        if (currentPos != RecyclerView.NO_POSITION) {
+            val visibleDay = (rvCalendarDays.adapter as CalendarAdapter).days[currentPos]
+            val cal = Calendar.getInstance()
+            cal.time = visibleDay
+            val fmtMonthYear = SimpleDateFormat("LLLL yyyy", Locale("ru"))
+            var strMonthYear = fmtMonthYear.format(cal.time)
+            strMonthYear = strMonthYear.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale("ru"))
+                else it.toString()
+            }
+            binding.tvMonthYear.text = strMonthYear
+        }
+    }
 }

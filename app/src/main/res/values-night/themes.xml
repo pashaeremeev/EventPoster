@@ -7,14 +7,14 @@
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/black</item>
         <!-- Customize your theme here. -->
         <item name="iconTintMode">@color/white</item>
     </style>
-    <style name="BackgroundPosterPreviewDesc">
+    <style name="BackgroundEventPreviewDesc">
         <item name="android:background">@color/black_200</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:tint">@color/white</item>

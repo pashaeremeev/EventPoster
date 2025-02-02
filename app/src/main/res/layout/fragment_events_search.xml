@@ -10,7 +10,7 @@
         android:id="@+id/rvEventSearchResult"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_poster_preview"
+        tools:listitem="@layout/item_event_preview"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"/>
