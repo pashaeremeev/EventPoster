@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.eventposter.app.CalendarClickListener
 import com.example.eventposter.app.ui.adapters.recycler.CalendarAdapter
 import com.example.eventposter.app.ui.adapters.recycler.EventAdapter
 import com.example.eventposter.databinding.FragmentHomeBinding
@@ -37,6 +38,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var rvEventsPreviews: RecyclerView
     private lateinit var  rvCalendarDays: RecyclerView
+    private lateinit var adapterCalendar: CalendarAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,8 +54,14 @@ class HomeFragment : Fragment() {
         rvEventsPreviews = binding.rvEventPreviews
         rvCalendarDays = binding.rvCalendarDays
 
-        val adapterCalendar = CalendarAdapter(requireContext())
+        adapterCalendar = CalendarAdapter(requireContext(), object: CalendarClickListener {
+            override fun invoke(date: Date) {
+                displayDate(date)
+                adapterCalendar.setSelected(date)
+            }
+        })
         val calendar = Calendar.getInstance()
+        displayDate(calendar.time)
         val lengthOfDays = 90
         val dates = mutableListOf<Date>()
         for (i in 0 until lengthOfDays) {
@@ -132,4 +140,10 @@ class HomeFragment : Fragment() {
             binding.tvMonthYear.text = strMonthYear
         }
     }
+
+    fun displayDate(date: Date) {
+        val fmt = SimpleDateFormat("d MMMM", Locale("ru", "RU"))
+        binding.tvDate.text = fmt.format(date)
+    }
+
 }

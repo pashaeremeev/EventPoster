@@ -7,15 +7,16 @@
     tools:context=".app.ui.home.HomeFragment">
 
     <TextView
-        android:id="@+id/tvMonthYear"
-        android:text="МЕСЯЦ ГОД"
-        android:fontFamily="@font/ubuntu_light"
-        android:textStyle="bold"
-        android:textSize="16sp"
+        android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:text="ДАТА"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +29,21 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMonthYear"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvDate"/>
+
+    <TextView
+        android:id="@+id/tvMonthYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu_light"
+        android:text="МЕСЯЦ ГОД"
+        android:alpha="0.75"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvCalendarDays" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvEventPreviews"
@@ -40,7 +55,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvCalendarDays"
+        app:layout_constraintTop_toBottomOf="@id/tvMonthYear"
         app:layout_constraintVertical_bias="0"
         tools:listitem="@layout/item_event_preview" />
 
