@@ -24,4 +24,14 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:backgroundTint">@color/black_200</item>
     </style>
+    <style name="DatePicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/black_200</item>
+        <item name="android:textColorPrimary">@color/white_200</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/DatePickerButton</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/DatePickerButton</item>
+    </style>
+    <style name="DatePicker.Button">
+        <item name="android:textColor">@color/white_200</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>
