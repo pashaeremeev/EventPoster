@@ -5,6 +5,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eventposter.R
+import com.example.eventposter.domain.EventModel
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class EventHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
@@ -26,13 +29,14 @@ class EventHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     fun getPosterPreviewImage() = posterPreviewImage
 
-    fun getPosterPreviewEventNameText() = posterPreviewEventNameText
-
-    fun getPosterPreviewIvLocation() = posterPreviewIvLocation
-
-    fun getPosterPreviewEventLocationText() = posterPreviewEventLocationText
-
-    fun getPosterPreviewIvDateTime() = posterPreviewIvDateTime
-
-    fun getPosterPreviewEventDateTimeText() = posterPreviewEventDateTimeText
+    fun bind(event: EventModel) {
+        posterPreviewEventNameText.text = event.name
+        posterPreviewEventLocationText.text = event.address
+        var fmt = SimpleDateFormat("d MMMM HH:mm", Locale("ru", "RU"))
+        val startAndEnd =
+            if (event.endDate != null)
+                fmt.format(event.startDate) + " – " + fmt.format(event.endDate)
+            else fmt.format(event.startDate)
+        posterPreviewEventDateTimeText.text = startAndEnd
+    }
 }

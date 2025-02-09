@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.eventposter.app.ui.adapters.recycler.EventAdapter
+import com.example.eventposter.app.ui.home.HomeFragment
 import com.example.eventposter.databinding.FragmentEventsSearchBinding
 import com.example.eventposter.domain.EventModel
 import java.util.Calendar
+import java.util.Date
 
 
 class EventsSearchFragment : Fragment() {
@@ -26,6 +28,7 @@ class EventsSearchFragment : Fragment() {
             }
             return fragment!!
         }
+        const val DAY_IN_MILLIS = 86_400_000
     }
 
     private lateinit var viewModel: EventsSearchViewModel
@@ -38,47 +41,48 @@ class EventsSearchFragment : Fragment() {
         _binding = FragmentEventsSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val recyclerView = binding.rvEventSearchResult
+        val rvEventSearchResult = binding.rvEventSearchResult
         val adapter = EventAdapter(requireContext())
 
-        adapter.events.add(
+        val cal = Calendar.getInstance()
+        val events = listOf(
             EventModel(
-                "Новый год на Красной Площади",
-                "г. Чебоксары, Красная Площадь",
-                Calendar.getInstance().time,
-                Calendar.getInstance().time,
-                "https://fs01.cap.ru/www22-09/gcheb/news/2023/01/18/9d4048df-fdf8-4300-a022-336e28ccc8f1/zaliv.jpg"
-            )
-        )
-        adapter.events.add(
+                id = 1,
+                name = "Новый год на Красной Площади",
+                address = "г. Чебоксары, Красная Площадь",
+                startDate =  cal.time,
+                endDate = Date(cal.timeInMillis + HomeFragment.DAY_IN_MILLIS * 5),
+                posterUrl = "https://fs01.cap.ru/www22-09/gcheb/news/2023/01/18/9d4048df-fdf8-4300-a022-336e28ccc8f1/zaliv.jpg"
+            ),
             EventModel(
-                "Новый год на Красной Площади",
-                "г. Чебоксары, Красная Площадь",
-                Calendar.getInstance().time,
-                Calendar.getInstance().time,
-                null
-            )
-        )
-        adapter.events.add(
+                id = 2,
+                name = "Раздача алмазов",
+                address = "г. Москва, Красная Площадь",
+                startDate =  cal.time,
+                endDate = Date(cal.timeInMillis + HomeFragment.DAY_IN_MILLIS * 3),
+                posterUrl = "https://kultura.orb.ru/uploads/images/afisha/2023/12/afisha_13020_0.jpg"
+            ),
             EventModel(
-                "Новый год на Красной Площади",
-                "г. Чебоксары, Красная Площадь",
-                Calendar.getInstance().time,
-                Calendar.getInstance().time,
-                null
-            )
-        )
-        adapter.events.add(
+                id = 3,
+                name = "Путешествие в Америку",
+                address = "г. Архангельск, Порт",
+                startDate =  cal.time,
+                endDate = Date(cal.timeInMillis + HomeFragment.DAY_IN_MILLIS * 120),
+                posterUrl = "https://m.media-amazon.com/images/M/MV5BMjA0ZDlkNzMtYjVlNS00MWY2LWE3N2ItMDZlMDEwNWU2N2M5XkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_.jpg"
+            ),
             EventModel(
-                "Новый год на Красной Площади",
-                "г. Чебоксары, Красная Площадь",
-                Calendar.getInstance().time,
-                Calendar.getInstance().time,
-                null
+                id = 4,
+                name = "Приглашение в гости",
+                address = "г. Чебоксары, пр. Мира, д. 48",
+                startDate =  cal.time,
+                endDate = Date(cal.timeInMillis + HomeFragment.DAY_IN_MILLIS * 5),
+                posterUrl = null
             )
         )
 
-        recyclerView.adapter = adapter
+        adapter.setEvents(events)
+
+        rvEventSearchResult.adapter = adapter
 
         return root
     }

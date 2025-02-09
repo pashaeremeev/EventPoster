@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eventposter.app.CalendarClickListener
@@ -22,9 +23,6 @@ import java.util.Locale
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     companion object {
@@ -36,6 +34,7 @@ class HomeFragment : Fragment() {
             }
             return fragment!!
         }
+        const val DAY_IN_MILLIS = 86_400_000
     }
 
     private lateinit var vm: HomeViewModel
@@ -78,43 +77,51 @@ class HomeFragment : Fragment() {
         }
 
         val adapterPreviews = EventAdapter(requireContext())
-        adapterPreviews.events.add(
-            EventModel(
-            "Новый год на Красной Площади",
-            "г. Чебоксары, Красная Площадь",
-                Calendar.getInstance().time,
-                Calendar.getInstance().time,
-                "https://fs01.cap.ru/www22-09/gcheb/news/2023/01/18/9d4048df-fdf8-4300-a022-336e28ccc8f1/zaliv.jpg"
-            )
+        val cal = Calendar.getInstance()
+        vm.setSelectedDate(cal.time)
+        val events = listOf(
+                EventModel(
+                    id = 1,
+                    name = "Новый год на Красной Площади",
+                    address = "г. Чебоксары, Красная Площадь",
+                    startDate =  cal.time,
+                    endDate = Date(cal.timeInMillis + DAY_IN_MILLIS * 5),
+                    posterUrl = "https://fs01.cap.ru/www22-09/gcheb/news/2023/01/18/9d4048df-fdf8-4300-a022-336e28ccc8f1/zaliv.jpg"
+                ),
+                EventModel(
+                    id = 2,
+                    name = "Раздача алмазов",
+                    address = "г. Москва, Красная Площадь",
+                    startDate =  cal.time,
+                    endDate = Date(cal.timeInMillis + DAY_IN_MILLIS * 3),
+                    posterUrl = "https://kultura.orb.ru/uploads/images/afisha/2023/12/afisha_13020_0.jpg"
+                ),
+                EventModel(
+                    id = 3,
+                    name = "Путешествие в Америку",
+                    address = "г. Архангельск, Порт",
+                    startDate =  cal.time,
+                    endDate = Date(cal.timeInMillis + DAY_IN_MILLIS * 120),
+                    posterUrl = "https://m.media-amazon.com/images/M/MV5BMjA0ZDlkNzMtYjVlNS00MWY2LWE3N2ItMDZlMDEwNWU2N2M5XkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_.jpg"
+                ),
+                EventModel(
+                    id = 4,
+                    name = "Приглашение в гости",
+                    address = "г. Чебоксары, пр. Мира, д. 48",
+                    startDate =  cal.time,
+                    endDate = Date(cal.timeInMillis + DAY_IN_MILLIS * 5),
+                    posterUrl = null
+                )
         )
-        adapterPreviews.events.add(
-            EventModel(
-                "Новый год на Красной Площади",
-                "г. Чебоксары, Красная Площадь",
-                Calendar.getInstance().time,
-                Calendar.getInstance().time,
-                null
-            )
-        )
-        adapterPreviews.events.add(
-            EventModel(
-                "Новый год на Красной Площади",
-                "г. Чебоксары, Красная Площадь",
-                Calendar.getInstance().time,
-                Calendar.getInstance().time,
-                null
-            )
-        )
-        adapterPreviews.events.add(
-            EventModel(
-                "Новый год на Красной Площади",
-                "г. Чебоксары, Красная Площадь",
-                Calendar.getInstance().time,
-                Calendar.getInstance().time,
-                null
-            )
-        )
+
+        vm.setEvents(events)
+
         binding.rvEventPreviews.adapter = adapterPreviews
+
+        vm.events.observe(viewLifecycleOwner) { newEvents ->
+            val result: DiffUtil.DiffResult? = adapterPreviews.setEvents(newEvents)
+            result?.dispatchUpdatesTo(adapterPreviews)
+        }
 
         binding.btnDatePicker.setOnClickListener {
             DatePickerFragment().apply {
@@ -139,7 +146,7 @@ class HomeFragment : Fragment() {
             val visibleDay = (binding.rvCalendarDays.adapter as CalendarAdapter).days[currentPos]
             val cal = Calendar.getInstance()
             cal.time = visibleDay
-            val fmtMonthYear = SimpleDateFormat("LLLL yyyy", Locale("ru"))
+            val fmtMonthYear = SimpleDateFormat("MMMM yyyy", Locale("ru"))
             var strMonthYear = fmtMonthYear.format(cal.time)
             strMonthYear = strMonthYear.replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase(Locale("ru"))
@@ -150,7 +157,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun displayDate(date: Date) {
-        val fmt = SimpleDateFormat("d MMMM", Locale("ru", "RU"))
+        val fmt = SimpleDateFormat("d MMMM yyyy", Locale("ru", "RU"))
         binding.tvDate.text = fmt.format(date)
     }
 
