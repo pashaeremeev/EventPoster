@@ -19,7 +19,7 @@
         android:theme="@style/BackgroundElement">
 
         <EditText
-            android:id="@+id/svAll"
+            android:id="@+id/etSearchText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
@@ -42,7 +42,7 @@
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/profileScrollSearchFragments"
+        android:id="@+id/tlProfileScrollSearchFragments"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,14 +59,14 @@
         app:tabPaddingStart="10dp"/>
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/profileViewPager"
+        android:id="@+id/vpProfileViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileScrollSearchFragments"
+        app:layout_constraintTop_toBottomOf="@+id/tlProfileScrollSearchFragments"
         android:orientation="horizontal"
         app:layout_constraintVertical_bias="0"/>
 

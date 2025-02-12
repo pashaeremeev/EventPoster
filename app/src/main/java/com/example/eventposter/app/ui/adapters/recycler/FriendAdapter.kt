@@ -3,9 +3,11 @@ package com.example.eventposter.app.ui.adapters.recycler
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.eventposter.R
+import com.example.eventposter.app.diffutils.UserDiffUtilCallback
 import com.example.eventposter.app.ui.viewholders.FriendHolder
 import com.example.eventposter.domain.UserModel
 
@@ -13,7 +15,16 @@ class FriendAdapter(
     private val context: Context
 ): RecyclerView.Adapter<FriendHolder?>() {
 
-    var friends = arrayListOf<UserModel>()
+    private var friends = listOf<UserModel>()
+
+    fun setUsers(users: List<UserModel>): DiffUtil.DiffResult {
+        val diff = UserDiffUtilCallback(
+            oldUsers = friends,
+            newUsers = users
+        )
+        this.friends = users
+        return DiffUtil.calculateDiff(diff)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendHolder {
         return FriendHolder(

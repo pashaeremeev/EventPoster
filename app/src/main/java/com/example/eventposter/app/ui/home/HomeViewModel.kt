@@ -16,7 +16,7 @@ class HomeViewModel : ViewModel() {
 
     companion object {
         const val LENGTH_OF_DAYS = 90
-        const val DAY_IN_MILLIS = 86_400_000
+        const val DAY_IN_MILLIS: Long = 86_400_000
     }
 
     private val _days = MutableLiveData<List<Date>>()
@@ -31,14 +31,12 @@ class HomeViewModel : ViewModel() {
     val events: LiveData<List<EventModel>>
         get() = _events.combine(selectedDate.asFlow()) {
             events, date ->
-            var eventsFilteredByDate = mutableListOf<EventModel>()
-            if (date != null) {
-                for (i in events.indices) {
-                    val event = events[i]
-                    val eventFilteredByDate = if (event.startDate.rangeTo(event.endDate).contains(date)
-                           || event.startDate.time.div(DAY_IN_MILLIS) == date.time.div(DAY_IN_MILLIS)) event else null
-                    eventFilteredByDate?.let { eventsFilteredByDate.add(it) }
-                }
+            val eventsFilteredByDate = mutableListOf<EventModel>()
+            for (i in events.indices) {
+                val event = events[i]
+                val eventFilteredByDate = if (event.startDate.rangeTo(event.endDate).contains(date)
+                       || event.startDate.time.div(DAY_IN_MILLIS) == date.time.div(DAY_IN_MILLIS)) event else null
+                eventFilteredByDate?.let { eventsFilteredByDate.add(it) }
             }
             return@combine eventsFilteredByDate
         }.asLiveData(context = Dispatchers.IO)

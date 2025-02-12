@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
             }
             return fragment!!
         }
-        const val DAY_IN_MILLIS = 86_400_000
+        const val DAY_IN_MILLIS: Long = 86_400_000
     }
 
     private lateinit var vm: HomeViewModel
@@ -119,8 +119,8 @@ class HomeFragment : Fragment() {
         binding.rvEventPreviews.adapter = adapterPreviews
 
         vm.events.observe(viewLifecycleOwner) { newEvents ->
-            val result: DiffUtil.DiffResult? = adapterPreviews.setEvents(newEvents)
-            result?.dispatchUpdatesTo(adapterPreviews)
+            val result: DiffUtil.DiffResult = adapterPreviews.setEvents(newEvents)
+            result.dispatchUpdatesTo(adapterPreviews)
         }
 
         binding.btnDatePicker.setOnClickListener {

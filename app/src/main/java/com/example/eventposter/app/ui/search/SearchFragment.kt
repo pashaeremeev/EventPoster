@@ -1,6 +1,8 @@
 package com.example.eventposter.app.ui.search
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,14 +39,14 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val searchViewModel =
+        val vm =
             ViewModelProvider(this)[SearchViewModel::class.java]
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val tabLayout = binding.profileScrollSearchFragments
-        val viewPager = binding.profileViewPager
+        val tabLayout = binding.tlProfileScrollSearchFragments
+        val viewPager = binding.vpProfileViewPager
 
         val adapter = PageAdapter(childFragmentManager, lifecycle)
 
@@ -58,6 +60,18 @@ class SearchFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager) { tab: TabLayout.Tab, position: Int ->
             tab.text = tabNames[position]
         }.attach()
+
+        binding.etSearchText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                adapter.setSearchQuery(s.toString())
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+            }
+        })
 
         return root
     }

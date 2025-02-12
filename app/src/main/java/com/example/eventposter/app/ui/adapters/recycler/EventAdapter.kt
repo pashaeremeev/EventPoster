@@ -17,17 +17,17 @@ class EventAdapter(
 
     private var events: List<EventModel> = listOf()
 
+    fun setEvents(newEvents: List<EventModel>): DiffUtil.DiffResult {
+        val diff = EventDiffUtilCallback(events, newEvents)
+        this.events = newEvents
+        return DiffUtil.calculateDiff(diff)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventHolder {
         return EventHolder(
             LayoutInflater.from(context)
                 .inflate(R.layout.item_event_preview, parent, false)
         )
-    }
-
-    fun setEvents(newEvents: List<EventModel>): DiffUtil.DiffResult {
-        val diff = EventDiffUtilCallback(events, newEvents)
-        this.events = newEvents
-        return DiffUtil.calculateDiff(diff)
     }
 
     override fun getItemCount(): Int = events.size
