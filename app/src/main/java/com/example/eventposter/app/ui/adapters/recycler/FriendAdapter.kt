@@ -29,7 +29,7 @@ class FriendAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendHolder {
         return FriendHolder(
             LayoutInflater.from(context)
-                .inflate(R.layout.item_friend_search, parent, false)
+                .inflate(R.layout.item_user_search, parent, false)
         )
     }
 
@@ -39,9 +39,9 @@ class FriendAdapter(
 
     override fun onBindViewHolder(holder: FriendHolder, position: Int) {
         val friend = friends[position]
-        holder.getUserNameText().text = friend.userName
+        holder.getUserNameText().text = friend.name
         Glide.with(context)
-            .load(friend.userIconUrl)
+            .load(friend.urlIcon)
             .error(R.drawable.ic_image_not_supported_24dp)
             .into(holder.getProfileIcon())
     }

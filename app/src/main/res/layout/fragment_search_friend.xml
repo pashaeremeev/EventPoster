@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".app.ui.friend.search.FriendSearchFragment">
+    tools:context=".app.ui.friend.search.UserSearchFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFriendsSearchResult"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_friend_search"
+        tools:listitem="@layout/item_user_search"
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"/>
 

@@ -48,7 +48,6 @@ class HomeFragment : Fragment() {
         vm = ViewModelProvider(this)[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
         adapterCalendar = CalendarAdapter(requireContext(), object: CalendarClickListener {
             override fun invoke(date: Date) {
@@ -119,7 +118,7 @@ class HomeFragment : Fragment() {
         binding.rvEventPreviews.adapter = adapterPreviews
 
         vm.events.observe(viewLifecycleOwner) { newEvents ->
-            val result: DiffUtil.DiffResult = adapterPreviews.setEvents(newEvents)
+            val result = adapterPreviews.setEvents(newEvents)
             result.dispatchUpdatesTo(adapterPreviews)
         }
 
@@ -131,7 +130,7 @@ class HomeFragment : Fragment() {
             }.show(parentFragmentManager, DATE_PICKER)
         }
 
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -146,7 +145,7 @@ class HomeFragment : Fragment() {
             val visibleDay = (binding.rvCalendarDays.adapter as CalendarAdapter).days[currentPos]
             val cal = Calendar.getInstance()
             cal.time = visibleDay
-            val fmtMonthYear = SimpleDateFormat("MMMM yyyy", Locale("ru"))
+            val fmtMonthYear = SimpleDateFormat("LLLL yyyy", Locale("ru"))
             var strMonthYear = fmtMonthYear.format(cal.time)
             strMonthYear = strMonthYear.replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase(Locale("ru"))

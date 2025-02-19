@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.eventposter.app.Searchable
+import com.example.eventposter.app.ui.FilterSettingsModel
+import com.example.eventposter.domain.FilterSettingsEventModel
 
 class PageAdapter
 (
@@ -25,8 +27,14 @@ class PageAdapter
     fun setSearchQuery(text: String) {
         fragments.forEach {
             if (it is Searchable) {
-                it.onQueryChanged(text)
+                it.onFilterChanged(text)
             }
+        }
+    }
+
+    fun setSearchSettings(settings: FilterSettingsModel, position: Int) {
+        if (fragments[position] is Searchable) {
+            (fragments[position] as Searchable).onFilterChanged(settings)
         }
     }
 

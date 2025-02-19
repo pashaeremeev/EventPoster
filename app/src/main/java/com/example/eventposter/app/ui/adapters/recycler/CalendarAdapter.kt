@@ -19,7 +19,11 @@ class CalendarAdapter(
     private var selectedPosition: Int? = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarDayViewHolder {
-        return CalendarDayViewHolder(LayoutInflater.from(context).inflate(R.layout.item_calendar_day, parent, false))
+        return CalendarDayViewHolder(
+            LayoutInflater.from(context).inflate(R.layout.item_calendar_day,
+                parent,
+                false)
+        )
     }
 
     override fun getItemCount(): Int = days.size

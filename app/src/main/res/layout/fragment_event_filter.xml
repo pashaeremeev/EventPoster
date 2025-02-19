@@ -1,0 +1,128 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".app.ui.FilterEventFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvSelectedStartDateEventFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Начальная дата периода"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-5dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnStartDatePickerFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_calendar_month_24dp"/>
+
+            <TextView
+                android:id="@+id/tvStartDateEventFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Не выбрано"
+                android:gravity="center"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvSelectedEndDateEventFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Конечная дата периода"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-5dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnEndDatePickerFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_calendar_month_24dp"/>
+
+            <TextView
+                android:id="@+id/tvEndDateEventFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Не выбрано"
+                android:gravity="center"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Категории"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkboxConcert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Концерты"/>
+
+        <!-- Цена -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Цена"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/priceSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:valueFrom="0"
+            android:valueTo="10000"
+            app:labelBehavior="withinBounds"/>
+
+        <!-- Кнопки -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="16dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnResetEventFilter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Сбросить"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnApplyEventFilter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Применить"
+                android:layout_marginStart="8dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -8,10 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.eventposter.app.ui.FilterEventFragment
+import com.example.eventposter.app.ui.FilterFragment
+import com.example.eventposter.app.ui.FilterSettingsModel
+import com.example.eventposter.app.ui.FilterUserFragment
 import com.example.eventposter.app.ui.adapters.PageAdapter
 import com.example.eventposter.app.ui.event.search.EventsSearchFragment
-import com.example.eventposter.app.ui.friend.search.FriendSearchFragment
+import com.example.eventposter.app.ui.friend.search.UserSearchFragment
 import com.example.eventposter.databinding.FragmentSearchBinding
+import com.example.eventposter.domain.FilterSettingsEventModel
+import com.example.eventposter.domain.FilterSettingsUserModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -19,6 +25,7 @@ class SearchFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null
     private val tabNames = arrayOf("Мероприятия", "Пользователи")
+    private var filter: FilterSettingsModel? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -26,6 +33,7 @@ class SearchFragment : Fragment() {
 
     companion object {
         private var fragment: SearchFragment? = null
+        const val FILTER_TAG = "FILTER_TAG"
         fun getInstance(): SearchFragment {
             if (fragment == null) {
                 fragment = SearchFragment()
@@ -43,7 +51,6 @@ class SearchFragment : Fragment() {
             ViewModelProvider(this)[SearchViewModel::class.java]
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
         val tabLayout = binding.tlProfileScrollSearchFragments
         val viewPager = binding.vpProfileViewPager
@@ -52,7 +59,7 @@ class SearchFragment : Fragment() {
 
         adapter.fragments = arrayListOf(
                 EventsSearchFragment.getInstance(),
-                FriendSearchFragment.getInstance()
+                UserSearchFragment.getInstance()
             )
 
         viewPager.adapter = adapter
@@ -67,13 +74,39 @@ class SearchFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 adapter.setSearchQuery(s.toString())
+                vm.eventFilter.text = s.toString()
+                vm.userFilter.name = s.toString()
             }
 
             override fun afterTextChanged(editable: Editable?) {
             }
         })
 
-        return root
+        binding.ivFilter.setOnClickListener {
+            val filterFragment: FilterFragment
+            when (viewPager.currentItem) {
+                0 -> {
+                    filterFragment = FilterEventFragment()
+                    vm.eventFilter.let { filterFragment.loadFilterSettings(it) }
+                }
+                else -> {
+                    filterFragment = FilterUserFragment()
+                    vm.userFilter.let { filterFragment.loadFilterSettings(it) }
+                }
+            }
+            if (parentFragmentManager.findFragmentByTag(FILTER_TAG) == null) {
+                filterFragment.show(parentFragmentManager, FILTER_TAG)
+            }
+            filterFragment.onFilterApplied = { settings ->
+                adapter.setSearchSettings(settings, viewPager.currentItem)
+                when(settings) {
+                    is FilterSettingsEventModel -> vm.eventFilter = settings
+                    is FilterSettingsUserModel -> vm.userFilter = settings
+                }
+            }
+        }
+
+        return binding.root
     }
 
     override fun onDestroyView() {

@@ -2,6 +2,7 @@ package com.example.eventposter.domain
 
 data class UserModel(
     val id: Int,
-    val userName: String,
-    val userIconUrl: String
+    val name: String,
+    val urlIcon: String,
+    val age: Int
 )
