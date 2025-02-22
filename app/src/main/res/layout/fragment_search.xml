@@ -16,7 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="horizontal"
-        android:theme="@style/BackgroundElement">
+        android:background="@drawable/rounded"
+        android:theme="@style/SearchView">
 
         <EditText
             android:id="@+id/etSearchText"
@@ -27,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:hint="@string/hint_search"
-            android:inputType="textNoSuggestions"
+            android:inputType="textAutoComplete"
             android:maxLines="1"
             android:layout_weight="1"/>
 

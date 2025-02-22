@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import com.example.eventposter.app.Searchable
 import com.example.eventposter.app.ui.FilterSettingsModel
 import com.example.eventposter.app.ui.adapters.recycler.FriendAdapter
-import com.example.eventposter.databinding.FragmentSearchFriendBinding
+import com.example.eventposter.databinding.FragmentSearchUserBinding
 import com.example.eventposter.domain.FilterSettingsUserModel
 import com.example.eventposter.domain.UserModel
 
 class UserSearchFragment : Fragment(), Searchable {
 
-    private var _binding: FragmentSearchFriendBinding? = null
+    private var _binding: FragmentSearchUserBinding? = null
     private val binding get() = _binding!!
 
     companion object {
@@ -38,7 +38,7 @@ class UserSearchFragment : Fragment(), Searchable {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSearchFriendBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchUserBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val adapter = FriendAdapter(requireContext())
