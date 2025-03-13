@@ -6,13 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.eventposter.R
 import com.example.eventposter.app.CalendarClickListener
+import com.example.eventposter.app.EventClickListener
 import com.example.eventposter.app.ui.DatePickerFragment
+import com.example.eventposter.app.ui.EventCardFragment
 import com.example.eventposter.app.ui.adapters.recycler.CalendarAdapter
 import com.example.eventposter.app.ui.adapters.recycler.EventAdapter
+import com.example.eventposter.app.ui.event.search.EventsSearchFragment
 import com.example.eventposter.databinding.FragmentHomeBinding
 import com.example.eventposter.domain.EventModel
 import java.text.SimpleDateFormat
@@ -28,6 +33,7 @@ class HomeFragment : Fragment() {
     companion object {
         private var fragment: HomeFragment? = null
         private const val DATE_PICKER = "DATE_PICKER"
+        private const val EVENT_CARD = "EVENT_CARD"
         fun getInstance(): HomeFragment {
             if (fragment == null) {
                 fragment = HomeFragment()
@@ -75,7 +81,11 @@ class HomeFragment : Fragment() {
             vm.selectedDate.value?.let { adapterCalendar.setSelected(it) }
         }
 
-        val adapterPreviews = EventAdapter(requireContext())
+        val adapterPreviews = EventAdapter(requireContext(), object : EventClickListener {
+            override fun invoke(event: EventModel?) {
+                event?.let { clickOnEventView(it) }
+            }
+        })
         val cal = Calendar.getInstance()
         vm.setSelectedDate(cal.time)
         val events = listOf(
@@ -158,6 +168,15 @@ class HomeFragment : Fragment() {
     private fun displayDate(date: Date) {
         val fmt = SimpleDateFormat("d MMMM yyyy", Locale("ru", "RU"))
         binding.tvDate.text = fmt.format(date)
+    }
+
+    private fun clickOnEventView(event: EventModel) {
+        val bundle = Bundle().apply {
+            putParcelable(EVENT_CARD, event)
+        }
+        requireActivity()
+            .findNavController(R.id.nav_host_fragment_activity_main)
+            .navigate(R.id.action_navigation_home_to_navigation_event_card, bundle)
     }
 
 }

@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.eventposter.R
+import com.example.eventposter.app.EventClickListener
 import com.example.eventposter.app.diffutils.EventDiffUtilCallback
 import com.example.eventposter.app.ui.viewholders.EventHolder
 import com.example.eventposter.domain.EventModel
 
 class EventAdapter(
-    private val context: Context
+    private val context: Context,
+    private val clickListener: EventClickListener
 ): RecyclerView.Adapter<EventHolder?>() {
 
     private var events: List<EventModel> = listOf()
@@ -39,6 +41,7 @@ class EventAdapter(
             .load(event.posterUrl)
             .error(R.drawable.ic_image_not_supported_24dp)
             .into(holder.getPosterPreviewImage())
+        holder.itemView.setOnClickListener{ clickListener.invoke(event) }
     }
 
 

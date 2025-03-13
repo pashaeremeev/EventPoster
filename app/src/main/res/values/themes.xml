@@ -24,6 +24,9 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:backgroundTint">@color/white_200</item>
     </style>
+    <style name="BackgroundElementWithIcons" parent="BackgroundElement">
+        <item name="android:tint">@color/black</item>
+    </style>
     <style name="DatePicker" parent="Theme.AppCompat.DayNight.Dialog">
         <item name="colorAccent">@color/white_500</item>
         <item name="android:textColorPrimary">@color/black_200</item>

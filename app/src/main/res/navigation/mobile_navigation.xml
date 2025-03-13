@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
@@ -8,18 +9,59 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.eventposter.app.ui.home.HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_event_card"
+            app:destination="@id/navigation_event_card" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.eventposter.app.ui.search.SearchFragment"
-        tools:layout="@layout/fragment_search_user" />
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_navigation_search_to_navigation_event_card"
+            app:destination="@id/navigation_event_card" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.eventposter.app.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_auth"
+            app:destination="@id/navigation_auth" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/navigation_auth"
+        android:name="com.example.eventposter.app.ui.auth.AuthFragment"
+        tools:layout="@layout/fragment_auth">
+        <action
+            android:id="@+id/action_navigation_auth_to_navigation_profile"
+            app:destination="@id/navigation_profile"
+            app:popUpTo="@id/navigation_profile"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_event_card"
+        android:name="com.example.eventposter.app.ui.EventCardFragment"
+        tools:layout="@layout/fragment_event_card">
+        <argument
+            android:name="event"
+            app:argType="com.example.eventposter.domain.EventModel"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_navigation_event_card_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_navigation_event_card_to_navigation_search"
+            app:destination="@id/navigation_search"
+            app:popUpTo="@id/navigation_search"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 </navigation>

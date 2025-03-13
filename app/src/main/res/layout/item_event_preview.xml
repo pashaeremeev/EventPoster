@@ -33,13 +33,13 @@
             android:theme="@style/BackgroundEventPreviewDesc">
 
             <TextView
-                android:id="@+id/poster_preview_event_name_text"
+                android:id="@+id/tvPosterPreviewEventName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/ubuntu_bold"
                 android:maxLines="1"
-                android:text="Наименование"
+                android:text="Название"
                 android:ellipsize="end"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/poster_preview_iv_location"
+                android:id="@+id/ivPosterPreviewLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_margin="8dp"
@@ -61,7 +61,7 @@
                 app:layout_constraintVertical_bias="0.35" />
 
             <TextView
-                android:id="@+id/poster_preview_event_location_text"
+                android:id="@+id/tvPosterPreviewEventLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_margin="8dp"
@@ -73,12 +73,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toEndOf="@+id/poster_preview_iv_location"
+                app:layout_constraintStart_toEndOf="@+id/ivPosterPreviewLocation"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.35" />
 
             <ImageView
-                android:id="@+id/poster_preview_iv_datetime"
+                android:id="@+id/ivPosterPreviewDateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_margin="8dp"
@@ -87,11 +87,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/poster_preview_iv_location"
+                app:layout_constraintTop_toBottomOf="@+id/ivPosterPreviewLocation"
                 app:layout_constraintVertical_bias="0"/>
 
             <TextView
-                android:id="@+id/poster_preview_event_datetime_text"
+                android:id="@+id/tvPosterPreviewDateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_margin="8dp"
@@ -103,8 +103,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toEndOf="@+id/poster_preview_iv_datetime"
-                app:layout_constraintTop_toBottomOf="@+id/poster_preview_event_location_text"
+                app:layout_constraintStart_toEndOf="@+id/ivPosterPreviewDateTime"
+                app:layout_constraintTop_toBottomOf="@+id/tvPosterPreviewEventLocation"
                 app:layout_constraintVertical_bias="0" />
 
 

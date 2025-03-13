@@ -25,7 +25,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_profile_circle_24dp"/>
+            android:src="@drawable/ic_profile_circle_24dp" />
 
         <TextView
             android:id="@+id/profileNameText"
@@ -39,32 +39,58 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/profileLocationText"
+            android:id="@+id/tvRoleName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:fontFamily="@font/ubuntu_light"
+            android:text="Роль пользователя"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/profileLocationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:drawableEnd="@drawable/ic_refresh_24dp"
+            android:fontFamily="@font/ubuntu_light"
             android:text="Локация"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:drawableEnd="@drawable/ic_refresh_24dp"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-    <GridLayout
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/toAuthButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topProfileInfo"
+        android:elevation="10dp"
+        android:layout_margin="10dp"
+        android:text="@string/log_in_text"
+        android:fontFamily="@font/ubuntu_light"
+        android:textStyle="bold"
         android:visibility="visible"
+        android:theme="@style/BackgroundElement"/>
+
+    <GridLayout
+        android:id="@+id/accountActions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount="3"
-        android:layout_marginTop="10dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintTop_toBottomOf="@+id/topProfileInfo">
+        app:layout_constraintTop_toBottomOf="@+id/toAuthButton"
+        app:layout_constraintVertical_bias="0">
 
         <LinearLayout
+            android:id="@+id/toFriendsView"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_columnWeight="1"
@@ -74,9 +100,9 @@
             android:theme="@style/BackgroundElement">
 
             <ImageView
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
+                android:layout_marginTop="8dp"
                 android:src="@drawable/ic_friends_24dp" />
 
             <TextView
@@ -88,6 +114,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/toEventsView"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_columnWeight="1"
@@ -97,9 +124,9 @@
             android:theme="@style/BackgroundElement">
 
             <ImageView
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
+                android:layout_marginTop="8dp"
                 android:src="@drawable/ic_events_24dp" />
 
             <TextView
@@ -111,6 +138,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/toSettingsView"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_columnWeight="1"
@@ -120,9 +148,9 @@
             android:theme="@style/BackgroundElement">
 
             <ImageView
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
+                android:layout_marginTop="8dp"
                 android:src="@drawable/ic_settings_24dp" />
 
             <TextView
@@ -133,32 +161,30 @@
 
         </LinearLayout>
 
-    </GridLayout>
-    
-<!--    <com.google.android.material.tabs.TabLayout-->
-<!--        android:id="@+id/profileScrollFragments"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        android:layout_margin="10dp"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/toProfileSettingsBtn"-->
-<!--        app:layout_constraintVertical_bias="0"-->
-<!--        app:tabMode="scrollable"-->
-<!--        app:tabIndicatorFullWidth="true"-->
-<!--        app:tabIndicatorHeight="2dp"-->
-<!--        app:tabPaddingEnd="0dp"-->
-<!--        app:tabPaddingStart="0dp"/>-->
+        <LinearLayout
+            android:id="@+id/toModerEventsView"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="10dp"
+            android:elevation="8dp"
+            android:orientation="vertical"
+            android:theme="@style/BackgroundElement">
 
-<!--    <androidx.viewpager2.widget.ViewPager2-->
-<!--        android:id="@+id/profileViewPager"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/profileScrollFragments"-->
-<!--        app:layout_constraintVertical_bias="0"/>-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_admin_panel_settings_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Модерирование" />
+
+        </LinearLayout>
+
+    </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

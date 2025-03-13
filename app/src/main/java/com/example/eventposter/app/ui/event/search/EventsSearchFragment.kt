@@ -6,8 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
+import com.example.eventposter.R
+import com.example.eventposter.app.EventClickListener
 import com.example.eventposter.app.Searchable
+import com.example.eventposter.app.ui.EventCardFragment
 import com.example.eventposter.app.ui.FilterSettingsModel
 import com.example.eventposter.app.ui.adapters.recycler.EventAdapter
 import com.example.eventposter.databinding.FragmentEventsSearchBinding
@@ -31,6 +35,7 @@ class EventsSearchFragment : Fragment(), Searchable {
             return fragment!!
         }
         const val DAY_IN_MILLIS: Long = 86_400_000
+        private const val EVENT_CARD = "EVENT_CARD"
     }
 
     private lateinit var vm: EventsSearchViewModel
@@ -42,7 +47,12 @@ class EventsSearchFragment : Fragment(), Searchable {
         vm = ViewModelProvider(this)[EventsSearchViewModel::class.java]
         _binding = FragmentEventsSearchBinding.inflate(inflater, container, false)
 
-        val adapter = EventAdapter(requireContext())
+        val adapter = EventAdapter(requireContext(), object : EventClickListener {
+                override fun invoke(event: EventModel?) {
+                    event?.let { clickOnEventView(it) }
+                }
+            }
+        )
 
         val cal = Calendar.getInstance()
         val events = listOf(
@@ -107,6 +117,15 @@ class EventsSearchFragment : Fragment(), Searchable {
         if (::vm.isInitialized) {
             vm.updateFilter { copy(text = newText) }
         }
+    }
+
+    private fun clickOnEventView(event: EventModel) {
+        val bundle = Bundle().apply {
+            putParcelable(EVENT_CARD, event)
+        }
+        requireActivity()
+            .findNavController(R.id.nav_host_fragment_activity_main)
+            .navigate(R.id.action_navigation_search_to_navigation_event_card, bundle)
     }
 
 }

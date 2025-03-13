@@ -4,4 +4,6 @@
     <string name="title_search">поиск</string>
     <string name="title_profile">профиль</string>
     <string name="hint_search">Поиск</string>
+    <string name="log_in_text">Войти в учётную запись</string>
+    <string name="log_out_text">Выйти с учётной записи</string>
 </resources>

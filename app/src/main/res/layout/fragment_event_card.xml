@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".app.ui.EventCardFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivBackEventCard"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_arrow_back_24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vpEventImages"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvEventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="Название"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/tvEventDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Описание о событии"
+                android:maxLines="3"
+                android:fontFamily="@font/ubuntu_light"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvEventName"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:elevation="8dp"
+                android:theme="@style/BackgroundElementWithIcons">
+
+                <ImageView
+                    android:id="@+id/ivEventDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_calendar_month_24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:id="@+id/tvEventDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:fontFamily="@font/ubuntu_light"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Дата старта – дата конца"
+                    android:textStyle="bold"
+                    android:layout_toEndOf="@id/ivEventDate"
+                    android:layout_alignTop="@id/ivEventDate"/>
+
+                <ImageView
+                    android:id="@+id/ivEventTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_datetime_24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/ivEventDate"/>
+
+                <TextView
+                    android:id="@+id/tvEventTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:fontFamily="@font/ubuntu_light"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Время старта – время конца"
+                    android:textStyle="bold"
+                    android:layout_toEndOf="@id/ivEventTime"
+                    android:layout_alignTop="@id/ivEventTime"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvEventName"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:elevation="8dp"
+                android:theme="@style/BackgroundElementWithIcons">
+
+                <ImageView
+                    android:id="@+id/ivEventLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_location_24dp"
+                    android:layout_alignParentStart="true"/>
+
+                <TextView
+                    android:id="@+id/tvEventLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:fontFamily="@font/ubuntu_light"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Адрес"
+                    android:textStyle="bold"
+                    android:layout_toEndOf="@id/ivEventLocation"
+                    android:layout_alignTop="@id/ivEventLocation"/>
+
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp">
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mvEventLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLookLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Построить маршрут"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/tvReviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="Отзывы"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvMakerContacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Информация об организаторе и его контакты"
+                android:fontFamily="@font/ubuntu_light"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBuy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Купить"
+        android:elevation="8dp"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"/>
+
+</LinearLayout>
+

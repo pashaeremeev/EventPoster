@@ -20,11 +20,11 @@ class EventHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     init {
         posterPreviewImage = itemView.findViewById(R.id.poster_preview_image)
-        posterPreviewEventNameText = itemView.findViewById(R.id.poster_preview_event_name_text)
-        posterPreviewIvLocation = itemView.findViewById(R.id.poster_preview_iv_location)
-        posterPreviewEventLocationText = itemView.findViewById(R.id.poster_preview_event_location_text)
-        posterPreviewIvDateTime = itemView.findViewById(R.id.poster_preview_iv_datetime)
-        posterPreviewEventDateTimeText = itemView.findViewById(R.id.poster_preview_event_datetime_text)
+        posterPreviewEventNameText = itemView.findViewById(R.id.tvPosterPreviewEventName)
+        posterPreviewIvLocation = itemView.findViewById(R.id.ivPosterPreviewLocation)
+        posterPreviewEventLocationText = itemView.findViewById(R.id.tvPosterPreviewEventLocation)
+        posterPreviewIvDateTime = itemView.findViewById(R.id.ivPosterPreviewDateTime)
+        posterPreviewEventDateTimeText = itemView.findViewById(R.id.tvPosterPreviewDateTime)
     }
 
     fun getPosterPreviewImage() = posterPreviewImage
