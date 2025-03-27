@@ -3,8 +3,8 @@ package com.example.eventposter.app.ui.friend.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.example.eventposter.domain.FilterSettingsUserModel
-import com.example.eventposter.domain.UserModel
+import com.example.eventposter.domain.model.FilterUserModel
+import com.example.eventposter.domain.model.UserModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,10 +13,10 @@ import kotlinx.coroutines.flow.update
 
 class UserSearchViewModel : ViewModel() {
 
-    private var _searchFilter = MutableStateFlow(FilterSettingsUserModel())
-    val searchFilter: Flow<FilterSettingsUserModel> = _searchFilter
+    private var _searchFilter = MutableStateFlow(FilterUserModel())
+    val searchFilter: Flow<FilterUserModel> = _searchFilter
 
-    fun updateFilter(update: FilterSettingsUserModel.() -> FilterSettingsUserModel) {
+    fun updateFilter(update: FilterUserModel.() -> FilterUserModel) {
         _searchFilter.update { it.update() }
     }
 
@@ -33,7 +33,7 @@ class UserSearchViewModel : ViewModel() {
 
     private fun prepareUsers(
         usersFlow: Flow<List<UserModel>>,
-        filterFlow: Flow<FilterSettingsUserModel>
+        filterFlow: Flow<FilterUserModel>
     ): LiveData<List<UserModel>> {
         return usersFlow.combine(filterFlow) {
                 users, filter ->

@@ -1,14 +1,11 @@
 package com.example.eventposter.app.ui.search
 
 import androidx.lifecycle.ViewModel
-import com.example.eventposter.app.ui.FilterSettingsModel
-import com.example.eventposter.domain.FilterSettingsEventModel
-import com.example.eventposter.domain.FilterSettingsUserModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.example.eventposter.domain.model.FilterEventModel
+import com.example.eventposter.domain.model.FilterUserModel
 
 class SearchViewModel : ViewModel() {
 
-    var eventFilter = FilterSettingsEventModel()
-    var userFilter = FilterSettingsUserModel()
+    var eventFilter = FilterEventModel()
+    var userFilter = FilterUserModel()
 }

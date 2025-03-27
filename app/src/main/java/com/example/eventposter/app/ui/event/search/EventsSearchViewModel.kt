@@ -3,8 +3,8 @@ package com.example.eventposter.app.ui.event.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.example.eventposter.domain.EventModel
-import com.example.eventposter.domain.FilterSettingsEventModel
+import com.example.eventposter.domain.model.EventModel
+import com.example.eventposter.domain.model.FilterEventModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,10 +13,10 @@ import kotlinx.coroutines.flow.update
 
 class EventsSearchViewModel : ViewModel() {
 
-    private var _searchFilter = MutableStateFlow(FilterSettingsEventModel())
-    val searchFilter: Flow<FilterSettingsEventModel> = _searchFilter
+    private var _searchFilter = MutableStateFlow(FilterEventModel())
+    val searchFilter: Flow<FilterEventModel> = _searchFilter
 
-    fun updateFilter(update: FilterSettingsEventModel.() -> FilterSettingsEventModel) {
+    fun updateFilter(update: FilterEventModel.() -> FilterEventModel) {
         _searchFilter.update { it.update() }
     }
 
@@ -33,7 +33,7 @@ class EventsSearchViewModel : ViewModel() {
 
     private fun prepareEvents(
         eventsFlow: Flow<List<EventModel>>,
-        filterFlow: Flow<FilterSettingsEventModel>
+        filterFlow: Flow<FilterEventModel>
     ): LiveData<List<EventModel>> {
 
         val result = eventsFlow.combine(filterFlow) { events, filter ->

@@ -11,12 +11,11 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.eventposter.R
 import com.example.eventposter.app.EventClickListener
 import com.example.eventposter.app.Searchable
-import com.example.eventposter.app.ui.EventCardFragment
-import com.example.eventposter.app.ui.FilterSettingsModel
+import com.example.eventposter.app.ui.FilterModel
 import com.example.eventposter.app.ui.adapters.recycler.EventAdapter
 import com.example.eventposter.databinding.FragmentEventsSearchBinding
-import com.example.eventposter.domain.EventModel
-import com.example.eventposter.domain.FilterSettingsEventModel
+import com.example.eventposter.domain.model.EventModel
+import com.example.eventposter.domain.model.FilterEventModel
 import java.util.Calendar
 import java.util.Date
 
@@ -107,8 +106,8 @@ class EventsSearchFragment : Fragment(), Searchable {
         _binding = null
     }
 
-    override fun onFilterChanged(newSettings: FilterSettingsModel) {
-        if (::vm.isInitialized && newSettings is FilterSettingsEventModel) {
+    override fun onFilterChanged(newSettings: FilterModel) {
+        if (::vm.isInitialized && newSettings is FilterEventModel) {
             vm.updateFilter { newSettings.copy() }
         }
     }

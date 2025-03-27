@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.eventposter.databinding.FragmentEventFilterBinding
-import com.example.eventposter.domain.FilterSettingsEventModel
+import com.example.eventposter.domain.model.FilterEventModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -17,8 +17,8 @@ class FilterEventFragment: FilterFragment() {
     private var _binding: FragmentEventFilterBinding? = null
     private val binding get() = _binding!!
 
-    private var currentFilter = FilterSettingsEventModel()
-    override var onFilterApplied: ((FilterSettingsModel) -> Unit)? = null
+    private var currentFilter = FilterEventModel()
+    override var onFilterApplied: ((FilterModel) -> Unit)? = null
 
     companion object {
         private var fragment: FilterEventFragment? = null
@@ -115,7 +115,7 @@ class FilterEventFragment: FilterFragment() {
         }
     }
 
-    override fun loadFilterSettings(settings: FilterSettingsModel) {
-        currentFilter = settings as FilterSettingsEventModel
+    override fun loadFilterSettings(settings: FilterModel) {
+        currentFilter = settings as FilterEventModel
     }
 }

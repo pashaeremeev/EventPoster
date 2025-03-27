@@ -1,7 +1,7 @@
 package com.example.eventposter.app.diffutils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.eventposter.domain.EventModel
+import com.example.eventposter.domain.model.EventModel
 
 class EventDiffUtilCallback(
     private val oldEvents: List<EventModel>,

@@ -10,14 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.eventposter.app.ui.FilterEventFragment
 import com.example.eventposter.app.ui.FilterFragment
-import com.example.eventposter.app.ui.FilterSettingsModel
+import com.example.eventposter.app.ui.FilterModel
 import com.example.eventposter.app.ui.FilterUserFragment
 import com.example.eventposter.app.ui.adapters.PageAdapter
 import com.example.eventposter.app.ui.event.search.EventsSearchFragment
 import com.example.eventposter.app.ui.friend.search.UserSearchFragment
 import com.example.eventposter.databinding.FragmentSearchBinding
-import com.example.eventposter.domain.FilterSettingsEventModel
-import com.example.eventposter.domain.FilterSettingsUserModel
+import com.example.eventposter.domain.model.FilterEventModel
+import com.example.eventposter.domain.model.FilterUserModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -25,7 +25,7 @@ class SearchFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null
     private val tabNames = arrayOf("Мероприятия", "Пользователи")
-    private var filter: FilterSettingsModel? = null
+    private var filter: FilterModel? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -100,8 +100,8 @@ class SearchFragment : Fragment() {
             filterFragment.onFilterApplied = { settings ->
                 adapter.setSearchSettings(settings, viewPager.currentItem)
                 when(settings) {
-                    is FilterSettingsEventModel -> vm.eventFilter = settings
-                    is FilterSettingsUserModel -> vm.userFilter = settings
+                    is FilterEventModel -> vm.eventFilter = settings
+                    is FilterUserModel -> vm.userFilter = settings
                 }
             }
         }

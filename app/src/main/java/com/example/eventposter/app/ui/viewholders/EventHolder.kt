@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eventposter.R
-import com.example.eventposter.domain.EventModel
+import com.example.eventposter.domain.model.EventModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 

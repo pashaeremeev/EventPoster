@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.example.eventposter.R
+import com.example.eventposter.app.ui.adapters.recycler.ImageSliderAdapter
 import com.example.eventposter.databinding.FragmentEventCardBinding
-import com.example.eventposter.domain.EventModel
+import com.example.eventposter.domain.model.EventModel
 
 class EventCardFragment : Fragment() {
 
@@ -36,6 +37,12 @@ class EventCardFragment : Fragment() {
         binding.ivBackEventCard.setOnClickListener {
             removeFragment()
         }
+
+        val adapter = ImageSliderAdapter(
+            context,
+            imageList =
+        )
+        binding.vpEventImages.adapter = adapter
 
         return binding.root
     }

@@ -4,9 +4,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 abstract class FilterFragment: BottomSheetDialogFragment() {
 
-    open var onFilterApplied: ((FilterSettingsModel) -> Unit)? = null
+    open var onFilterApplied: ((FilterModel) -> Unit)? = null
 
-    abstract fun loadFilterSettings(settings: FilterSettingsModel)
+    abstract fun loadFilterSettings(settings: FilterModel)
 }
 
-abstract class FilterSettingsModel
+abstract class FilterModel

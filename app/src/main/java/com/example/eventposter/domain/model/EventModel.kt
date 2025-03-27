@@ -1,4 +1,4 @@
-package com.example.eventposter.domain
+package com.example.eventposter.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

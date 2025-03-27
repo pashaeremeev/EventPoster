@@ -1,10 +1,9 @@
-package com.example.eventposter.domain
+package com.example.eventposter.data.storage
 
-import com.example.eventposter.app.ui.FilterSettingsModel
 import java.util.Calendar
 import java.util.Date
 
-data class FilterSettingsEventModel(
+data class FilterEvent(
     var text: String = "",
     var startDate: Date = Calendar.getInstance().time,
     var endDate: Date? = null,
@@ -12,4 +11,4 @@ data class FilterSettingsEventModel(
     var minPrice: Float = 0f,
     var maxPrice: Float = 10000f,
     var radius: Int = 10
-): FilterSettingsModel()
+)

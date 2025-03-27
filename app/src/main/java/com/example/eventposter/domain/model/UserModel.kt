@@ -1,4 +1,4 @@
-package com.example.eventposter.domain
+package com.example.eventposter.domain.model
 
 data class UserModel(
     val id: Int,

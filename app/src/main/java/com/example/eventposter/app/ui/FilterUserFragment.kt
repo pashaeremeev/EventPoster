@@ -7,15 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.eventposter.databinding.FragmentUserFilterBinding
-import com.example.eventposter.domain.FilterSettingsUserModel
+import com.example.eventposter.domain.model.FilterUserModel
 
 class FilterUserFragment: FilterFragment() {
 
     private var _binding: FragmentUserFilterBinding? = null
     private val binding get() = _binding!!
 
-    private var currentFilter = FilterSettingsUserModel()
-    override var onFilterApplied: ((FilterSettingsModel) -> Unit)? = null
+    private var currentFilter = FilterUserModel()
+    override var onFilterApplied: ((FilterModel) -> Unit)? = null
 
     companion object {
         private var fragment: FilterEventFragment? = null
@@ -68,7 +68,7 @@ class FilterUserFragment: FilterFragment() {
         binding.etUserAge.setText("")
     }
 
-    override fun loadFilterSettings(settings: FilterSettingsModel) {
-        currentFilter = settings as FilterSettingsUserModel
+    override fun loadFilterSettings(settings: FilterModel) {
+        currentFilter = settings as FilterUserModel
     }
 }

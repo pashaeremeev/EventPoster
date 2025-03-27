@@ -7,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.eventposter.app.Searchable
-import com.example.eventposter.app.ui.FilterSettingsModel
+import com.example.eventposter.app.ui.FilterModel
 import com.example.eventposter.app.ui.adapters.recycler.FriendAdapter
 import com.example.eventposter.databinding.FragmentSearchUserBinding
-import com.example.eventposter.domain.FilterSettingsUserModel
-import com.example.eventposter.domain.UserModel
+import com.example.eventposter.domain.model.FilterUserModel
+import com.example.eventposter.domain.model.UserModel
 
 class UserSearchFragment : Fragment(), Searchable {
 
@@ -74,8 +74,8 @@ class UserSearchFragment : Fragment(), Searchable {
         _binding = null
     }
 
-    override fun onFilterChanged(newSettings: FilterSettingsModel) {
-        if (::vm.isInitialized && newSettings is FilterSettingsUserModel) {
+    override fun onFilterChanged(newSettings: FilterModel) {
+        if (::vm.isInitialized && newSettings is FilterUserModel) {
             vm.updateFilter{ newSettings.copy() }
         }
     }

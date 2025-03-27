@@ -10,7 +10,7 @@ import com.example.eventposter.R
 import com.example.eventposter.app.EventClickListener
 import com.example.eventposter.app.diffutils.EventDiffUtilCallback
 import com.example.eventposter.app.ui.viewholders.EventHolder
-import com.example.eventposter.domain.EventModel
+import com.example.eventposter.domain.model.EventModel
 
 class EventAdapter(
     private val context: Context,
