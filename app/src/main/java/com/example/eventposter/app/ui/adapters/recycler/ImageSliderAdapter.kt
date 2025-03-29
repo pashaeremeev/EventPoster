@@ -1,6 +1,7 @@
 package com.example.eventposter.app.ui.adapters.recycler
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -11,12 +12,16 @@ class ImageSliderAdapter(
     private val context: Context,
     private val imageList: List<String>
 ) : RecyclerView.Adapter<ImageSliderViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageSliderViewHolder {
-        TODO("Not yet implemented")
+        return ImageSliderViewHolder(
+            LayoutInflater.from(context)
+                .inflate(R.layout.item_slider_image, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return imageList.size
     }
 
     override fun onBindViewHolder(holder: ImageSliderViewHolder, position: Int) {

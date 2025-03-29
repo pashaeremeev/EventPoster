@@ -1,4 +1,4 @@
-package com.example.eventposter.data.storage
+package com.example.eventposter.data
 
 import java.util.Calendar
 import java.util.Date

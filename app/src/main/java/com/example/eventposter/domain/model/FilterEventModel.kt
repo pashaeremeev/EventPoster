@@ -1,10 +1,9 @@
 package com.example.eventposter.domain.model
 
 import com.example.eventposter.app.ui.FilterModel
-import com.example.eventposter.data.storage.FilterEvent
+import com.example.eventposter.data.FilterEvent
 import java.util.Calendar
 import java.util.Date
-import kotlin.math.min
 
 data class FilterEventModel(
     var text: String = "",

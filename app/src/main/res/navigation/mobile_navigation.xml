@@ -48,10 +48,6 @@
         android:id="@+id/navigation_event_card"
         android:name="com.example.eventposter.app.ui.EventCardFragment"
         tools:layout="@layout/fragment_event_card">
-        <argument
-            android:name="event"
-            app:argType="com.example.eventposter.domain.EventModel"
-            android:defaultValue="@null" />
         <action
             android:id="@+id/action_navigation_event_card_to_navigation_home"
             app:destination="@id/navigation_home"

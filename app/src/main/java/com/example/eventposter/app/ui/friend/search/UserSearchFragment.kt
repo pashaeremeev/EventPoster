@@ -6,12 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.eventposter.app.Searchable
 import com.example.eventposter.app.ui.FilterModel
 import com.example.eventposter.app.ui.adapters.recycler.FriendAdapter
 import com.example.eventposter.databinding.FragmentSearchUserBinding
 import com.example.eventposter.domain.model.FilterUserModel
 import com.example.eventposter.domain.model.UserModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class UserSearchFragment : Fragment(), Searchable {
 
@@ -39,34 +44,24 @@ class UserSearchFragment : Fragment(), Searchable {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSearchUserBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val adapter = FriendAdapter(requireContext())
-        val users = listOf(
-            UserModel(
-                id = 1,
-                name = "User1",
-                urlIcon = "https://sun1-96.userapi.com/s/v1/ig2/KBdKwastFMxQ6k9HdHl49wD7UiUinUcoVb9_800NfAZ8r_Cg8u-XW-gFmwh5w3-CCc_pNwohVgs4RNp3FrsFytHV.jpg?quality=95&crop=848,251,801,801&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720&ava=1&u=7NUvYU647bCq1G90YX55vnE2uy41oZLGPnZVWOwtDqI&cs=200x200",
-                age = 18
-            ),
-            UserModel(
-                id = 2,
-                name = "User2",
-                urlIcon = "https://sun1-28.userapi.com/s/v1/ig2/3nWI2TmzQM-aqZ5tCQRDYfj_al1xbOwhEzfCRQw6nYe6KKpYCh-LvatYpp_jv09aJCNmQrXL7naVrZSgCy34Qhjt.jpg?quality=95&crop=0,2,1077,1077&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720&ava=1&cs=50x50",
-                age = 17
-            )
-        )
-
-        vm.setUsers(users)
-
-        vm.users.observe(viewLifecycleOwner) { users ->
-            val diff = adapter.setUsers(users = users)
-            diff.dispatchUpdatesTo(adapter)
-        }
 
         binding.rvFriendsSearchResult.adapter = adapter
 
-        return root
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.users.collect { users ->
+                    val diff = adapter.setUsers(users = users)
+                    diff.dispatchUpdatesTo(adapter)
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

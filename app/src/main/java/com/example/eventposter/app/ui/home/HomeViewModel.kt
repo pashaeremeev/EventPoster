@@ -5,10 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
+import com.example.eventposter.data.repository.EventRepositoryImpl
 import com.example.eventposter.domain.model.EventModel
+import com.example.eventposter.domain.usecase.GetActiveEventsUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.update
 import java.util.Calendar
 import java.util.Date
 
@@ -16,41 +21,26 @@ class HomeViewModel : ViewModel() {
 
     companion object {
         const val LENGTH_OF_DAYS = 90
-        const val DAY_IN_MILLIS: Long = 86_400_000
     }
 
+    private val repository = EventRepositoryImpl.getInstance()
+    private val getActiveEventsUseCase = GetActiveEventsUseCase(repository)
+
     private val _days = MutableLiveData<List<Date>>()
-    val days: LiveData<List<Date>>
-        get() = _days
+    val days: LiveData<List<Date>> = _days
 
-    private val _selectedDate = MutableLiveData<Date>()
-    val selectedDate: LiveData<Date>
-        get() = _selectedDate
+    private val _selectedDate = MutableStateFlow(Date())
+    val selectedDate: StateFlow<Date> = _selectedDate
 
-    private val _events = MutableStateFlow<List<EventModel>>(listOf())
-    val events: LiveData<List<EventModel>>
-        get() = _events.combine(selectedDate.asFlow()) {
-            events, date ->
-            val eventsFilteredByDate = mutableListOf<EventModel>()
-            for (i in events.indices) {
-                val event = events[i]
-                val eventFilteredByDate = if (event.startDate.rangeTo(event.endDate).contains(date)
-                       || event.startDate.time.div(DAY_IN_MILLIS) == date.time.div(DAY_IN_MILLIS)) event else null
-                eventFilteredByDate?.let { eventsFilteredByDate.add(it) }
-            }
-            return@combine eventsFilteredByDate
-        }.asLiveData(context = Dispatchers.IO)
+    val events: Flow<List<EventModel>> = getActiveEventsUseCase
+        .launch(selectedDate)
 
     init {
         getDays()
     }
 
     fun setSelectedDate(date: Date) {
-        _selectedDate.value = date
-    }
-
-    fun setEvents(events: List<EventModel>) {
-        _events.value = events
+        _selectedDate.update { date }
     }
 
     private fun getDays() {

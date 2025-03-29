@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,15 +20,13 @@ import com.example.eventposter.app.ui.adapters.recycler.CalendarAdapter
 import com.example.eventposter.app.ui.adapters.recycler.EventAdapter
 import com.example.eventposter.databinding.FragmentHomeBinding
 import com.example.eventposter.domain.model.EventModel
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
 class HomeFragment : Fragment() {
-
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
 
     companion object {
         private var fragment: HomeFragment? = null
@@ -37,8 +38,11 @@ class HomeFragment : Fragment() {
             }
             return fragment!!
         }
-        const val DAY_IN_MILLIS: Long = 86_400_000
     }
+
+    private var _binding: FragmentHomeBinding? = null
+
+    private val binding get() = _binding!!
 
     private lateinit var vm: HomeViewModel
     private lateinit var adapterCalendar: CalendarAdapter
@@ -51,6 +55,12 @@ class HomeFragment : Fragment() {
         vm = ViewModelProvider(this)[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         adapterCalendar = CalendarAdapter(requireContext(), object: CalendarClickListener {
             override fun invoke(date: Date) {
@@ -66,16 +76,20 @@ class HomeFragment : Fragment() {
             }
         })
 
-        vm.selectedDate.observe(viewLifecycleOwner) { date ->
-            adapterCalendar.setSelected(date)
-            displayDate(date)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.selectedDate.collect { date ->
+                    adapterCalendar.setSelected(date)
+                    displayDate(date)
+                }
+            }
         }
 
         displayDate(Calendar.getInstance().time)
 
         vm.days.observe(viewLifecycleOwner) { days ->
             adapterCalendar.days = days
-            vm.selectedDate.value?.let { adapterCalendar.setSelected(it) }
+            vm.selectedDate.value.let { adapterCalendar.setSelected(it) }
         }
 
         val adapterPreviews = EventAdapter(requireContext(), object : EventClickListener {
@@ -85,48 +99,16 @@ class HomeFragment : Fragment() {
         })
         val cal = Calendar.getInstance()
         vm.setSelectedDate(cal.time)
-        val events = listOf(
-                EventModel(
-                    id = 1,
-                    name = "Новый год на Красной Площади",
-                    address = "г. Чебоксары, Красная Площадь",
-                    startDate =  cal.time,
-                    endDate = Date(cal.timeInMillis + DAY_IN_MILLIS * 5),
-                    posterUrl = "https://fs01.cap.ru/www22-09/gcheb/news/2023/01/18/9d4048df-fdf8-4300-a022-336e28ccc8f1/zaliv.jpg"
-                ),
-                EventModel(
-                    id = 2,
-                    name = "Раздача алмазов",
-                    address = "г. Москва, Красная Площадь",
-                    startDate =  cal.time,
-                    endDate = Date(cal.timeInMillis + DAY_IN_MILLIS * 3),
-                    posterUrl = "https://kultura.orb.ru/uploads/images/afisha/2023/12/afisha_13020_0.jpg"
-                ),
-                EventModel(
-                    id = 3,
-                    name = "Путешествие в Америку",
-                    address = "г. Архангельск, Порт",
-                    startDate =  cal.time,
-                    endDate = Date(cal.timeInMillis + DAY_IN_MILLIS * 120),
-                    posterUrl = "https://m.media-amazon.com/images/M/MV5BMjA0ZDlkNzMtYjVlNS00MWY2LWE3N2ItMDZlMDEwNWU2N2M5XkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_.jpg"
-                ),
-                EventModel(
-                    id = 4,
-                    name = "Приглашение в гости",
-                    address = "г. Чебоксары, пр. Мира, д. 48",
-                    startDate =  cal.time,
-                    endDate = Date(cal.timeInMillis + DAY_IN_MILLIS * 5),
-                    posterUrl = null
-                )
-        )
-
-        vm.setEvents(events)
 
         binding.rvEventPreviews.adapter = adapterPreviews
 
-        vm.events.observe(viewLifecycleOwner) { newEvents ->
-            val result = adapterPreviews.setEvents(newEvents)
-            result.dispatchUpdatesTo(adapterPreviews)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.events.collect { events ->
+                    val result = adapterPreviews.setEvents(events)
+                    result.dispatchUpdatesTo(adapterPreviews)
+                }
+            }
         }
 
         binding.btnDatePicker.setOnClickListener {
@@ -136,8 +118,6 @@ class HomeFragment : Fragment() {
                 }
             }.show(parentFragmentManager, DATE_PICKER)
         }
-
-        return binding.root
     }
 
     override fun onDestroyView() {
@@ -169,7 +149,7 @@ class HomeFragment : Fragment() {
 
     private fun clickOnEventView(event: EventModel) {
         val bundle = Bundle().apply {
-            putParcelable(EVENT_CARD, event)
+            putInt(EVENT_CARD, event.id)
         }
         requireActivity()
             .findNavController(R.id.nav_host_fragment_activity_main)

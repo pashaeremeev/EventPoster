@@ -1,17 +1,42 @@
 package com.example.eventposter.data.repository
 
-import com.example.eventposter.data.entity.User
+import com.example.eventposter.data.storage.UserStorage
+import com.example.eventposter.domain.model.FilterUserModel
+import com.example.eventposter.domain.model.UserModel
 import com.example.eventposter.domain.repository.UserRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class UserRepositoryImpl: UserRepository {
 
-    private val userList = mutableListOf<User>()
-
-    override fun getUserList(): List<User> {
-        return userList
+    companion object {
+        private var repository: UserRepositoryImpl? = null
+        fun getInstance(): UserRepositoryImpl {
+            if (repository == null) {
+                repository = UserRepositoryImpl()
+            }
+            return repository!!
+        }
     }
 
-    override fun getUserById(id: Int): User? {
-        return userList.firstOrNull{ it.id == id }
+    private val storage = UserStorage.getInstance()
+
+    override fun getUsersFlow(): Flow<List<UserModel>> {
+        return storage.getUsersFlow().map { users ->
+            users.map { user -> user.toModel() }
+        }
     }
+
+    override fun getUserFlowById(idFlow: Flow<Int>): Flow<UserModel?> {
+        return storage.getUserFlowById(idFlow).map { user -> user?.toModel() }
+    }
+
+    override fun getUsersFlowByFilter(filterFlow: Flow<FilterUserModel>): Flow<List<UserModel>> {
+        val filterFlowToData = filterFlow.map { filter -> filter.toData() }
+        return storage.getUsersFlowByFilter(filterFlowToData).map { users ->
+            users.map { user -> user.toModel() }
+        }
+    }
+
+
 }

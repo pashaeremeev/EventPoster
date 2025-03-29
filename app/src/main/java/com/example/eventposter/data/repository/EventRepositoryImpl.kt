@@ -10,6 +10,16 @@ import java.util.Date
 
 class EventRepositoryImpl: EventRepository {
 
+    companion object {
+        private var repository: EventRepositoryImpl? = null
+        fun getInstance(): EventRepositoryImpl {
+            if (repository == null) {
+                repository = EventRepositoryImpl()
+            }
+            return repository!!
+        }
+    }
+
     private val storage = EventStorage.getInstance()
 
     override fun getEventsFlow(): Flow<List<EventModel>> {
@@ -24,15 +34,14 @@ class EventRepositoryImpl: EventRepository {
         }
     }
 
-    override fun getEventFlowById(id: Int): Flow<EventModel?> {
-        return storage.getEventFlowById(id).map { event -> event?.toModel() }
+    override fun getEventFlowById(idFlow: Flow<Int>): Flow<EventModel?> {
+        return storage.getEventFlowById(idFlow).map { event -> event?.toModel() }
     }
 
     override fun getEventsFlowByFilter(filterFlow: Flow<FilterEventModel>): Flow<List<EventModel>> {
         val filterFlowToData = filterFlow.map { filter -> filter.toData() }
-        return storage.getEventsByFilter(filterFlowToData).map {
-                events -> events.map {
-                    event -> event.toModel()
+        return storage.getEventsByFilter(filterFlowToData).map { events ->
+            events.map { event -> event.toModel()
             }
         }
     }

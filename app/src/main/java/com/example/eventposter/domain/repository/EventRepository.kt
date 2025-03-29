@@ -11,7 +11,7 @@ interface EventRepository {
 
     fun getActiveEventsFlow(dateFlow: Flow<Date>): Flow<List<EventModel>>
 
-    fun getEventFlowById(id: Int): Flow<EventModel?>
+    fun getEventFlowById(id: Flow<Int>): Flow<EventModel?>
 
     fun getEventsFlowByFilter(filter: Flow<FilterEventModel>): Flow<List<EventModel>>
 }

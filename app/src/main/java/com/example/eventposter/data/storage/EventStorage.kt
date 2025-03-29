@@ -1,10 +1,10 @@
 package com.example.eventposter.data.storage
 
+import com.example.eventposter.data.FilterEvent
 import com.example.eventposter.data.entity.Event
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import java.util.Calendar
 import java.util.Date
 
@@ -71,8 +71,11 @@ class EventStorage {
         return@combine eventsFilteredByDate
     }
 
-    fun getEventFlowById(id: Int): Flow<Event?> = getEventsFlow().map {
-        events -> events.firstOrNull { event -> event.id == id }
+    fun getEventFlowById(idFlow: Flow<Int>): Flow<Event?>  {
+        val event = getEventsFlow().combine(idFlow) { events, id ->
+            return@combine events.firstOrNull { it.id == id }
+        }
+        return event
     }
 
     fun getEventsByFilter(filterFlow: Flow<FilterEvent>): Flow<List<Event>> {
