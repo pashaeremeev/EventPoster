@@ -3,9 +3,11 @@ package com.example.eventposter.app.ui.adapters.recycler
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.eventposter.R
 import com.example.eventposter.app.EventClickListener
 import com.example.eventposter.app.diffutils.EventDiffUtilCallback
@@ -39,6 +41,7 @@ class EventAdapter(
         holder.bind(event)
         Glide.with(context)
             .load(event.posterUrl)
+            .centerCrop()
             .error(R.drawable.ic_image_not_supported_24dp)
             .into(holder.getPosterPreviewImage())
         holder.itemView.setOnClickListener{ clickListener.invoke(event) }

@@ -6,4 +6,6 @@
     <string name="hint_search">Поиск</string>
     <string name="log_in_text">Войти в учётную запись</string>
     <string name="log_out_text">Выйти с учётной записи</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
