@@ -25,7 +25,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_profile_circle_24dp" />
+            android:src="@drawable/ic_profile_circle_24dp"/>
 
         <TextView
             android:id="@+id/profileNameText"
@@ -36,7 +36,7 @@
             android:fontFamily="@font/ubuntu_light"
             android:text="Имя"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tvRoleName"
@@ -58,7 +58,7 @@
             android:fontFamily="@font/ubuntu_light"
             android:text="Локация"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
@@ -70,7 +70,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topProfileInfo"
         android:elevation="10dp"
-        android:layout_margin="10dp"
+        android:layout_margin="8dp"
         android:text="@string/log_in_text"
         android:fontFamily="@font/ubuntu_light"
         android:textStyle="bold"
@@ -82,7 +82,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount="3"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:useDefaultMargins="true"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,15 +98,16 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_columnWeight="1"
-            android:layout_margin="10dp"
             android:elevation="8dp"
             android:orientation="vertical"
+            android:padding="8dp"
             android:theme="@style/BackgroundElement">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="8dp"
+                android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_friends_24dp" />
 
             <TextView
@@ -118,22 +123,23 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_columnWeight="1"
-            android:layout_margin="10dp"
             android:elevation="8dp"
             android:orientation="vertical"
+            android:padding="8dp"
             android:theme="@style/BackgroundElement">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="8dp"
+                android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_events_24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Мероприятия" />
+                android:text="Мероприятия"/>
 
         </LinearLayout>
 
@@ -142,16 +148,17 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_columnWeight="1"
-            android:layout_margin="10dp"
             android:elevation="8dp"
+            android:padding="8dp"
             android:orientation="vertical"
             android:theme="@style/BackgroundElement">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/ic_settings_24dp" />
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_settings_24dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -166,25 +173,25 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_columnWeight="1"
-            android:layout_margin="10dp"
             android:elevation="8dp"
             android:orientation="vertical"
+            android:padding="8dp"
             android:theme="@style/BackgroundElement">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="8dp"
+                android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_admin_panel_settings_24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Модерирование" />
+                android:text="Модерация" />
 
         </LinearLayout>
-
     </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -60,6 +60,14 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"/>
 
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/fbKeywords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,12 +126,13 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/addressLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tvEventName"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="5dp"
                 android:padding="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -156,7 +165,7 @@
                 android:id="@+id/btnLookLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Построить маршрут"
+                android:text="Посмотреть на карте"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"/>
@@ -171,6 +180,15 @@
                 android:fontFamily="@font/ubuntu_bold"
                 android:text="Отзывы"
                 android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFeedbacks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:id="@+id/tvMakerContacts"

@@ -34,27 +34,25 @@ class AuthFragment : Fragment() {
     ): View {
         vm = ViewModelProvider(this)[AuthViewModel::class.java]
         _binding = FragmentAuthBinding.inflate(inflater, container, false)
-        val root = binding.root
-        val toRegView = binding.toRegActionButton
-        val ivBack = binding.ivBackAuth
-        val tvAuthLabel = binding.tvAuthLabel
-        val authButton = binding.authButton
-        toRegView.setOnClickListener {
+
+        binding.toRegActionButton.setOnClickListener {
             if (isAuth) {
-                tvAuthLabel.text = "Регистрация"
-                authButton.text = "Зарегистрироваться"
-                toRegView.text = "Уже есть учётная запись"
+                binding.tvAuthLabel.text = "Регистрация"
+                binding.authButton.text = "Зарегистрироваться"
+                binding.toRegActionButton.text = "Уже есть учётная запись"
             } else {
-                tvAuthLabel.text = "Вход в профиль"
-                authButton.text = "Войти"
-                toRegView.text = "Ещё нет учётной записи"
+                binding.tvAuthLabel.text = "Вход в профиль"
+                binding.authButton.text = "Войти"
+                binding.toRegActionButton.text = "Ещё нет учётной записи"
             }
             isAuth = !isAuth
         }
-        ivBack.setOnClickListener {
+
+        binding.ivBackAuth.setOnClickListener {
             navigateTo(R.id.action_navigation_auth_to_navigation_profile)
         }
-        return root
+
+        return binding.root
     }
 
     private fun navigateTo(resourceId: Int) {

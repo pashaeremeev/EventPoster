@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.eventposter.app.displayDate
 import com.example.eventposter.databinding.FragmentEventFilterBinding
 import com.example.eventposter.domain.model.FilterEventModel
 import java.text.SimpleDateFormat
@@ -68,10 +69,7 @@ class FilterEventFragment: FilterFragment() {
             datePicker.show(parentFragmentManager, DATE_PICKER)
             datePicker.setListener { date ->
                 currentFilter.startDate = date
-                displayDate(
-                    view = binding.tvStartDateEventFilter,
-                    date = date
-                )
+                binding.tvStartDateEventFilter.displayDate(date)
             }
         }
 
@@ -80,10 +78,7 @@ class FilterEventFragment: FilterFragment() {
             datePicker.show(parentFragmentManager, DATE_PICKER)
             datePicker.setListener { date ->
                 currentFilter.endDate = date
-                displayDate(
-                    view = binding.tvEndDateEventFilter,
-                    date = date
-                )
+                binding.tvEndDateEventFilter.displayDate(date)
             }
         }
 

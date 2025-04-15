@@ -61,26 +61,31 @@ class ProfileFragment : Fragment() {
             ViewModelProvider(this)[ProfileViewModel::class.java]
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val locationText = binding.profileLocationText
-        val toAuthButton = binding.toAuthButton
+        return binding.root
+    }
 
-        toAuthButton.setOnClickListener{
-            openAuthView()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.toAuthButton.setOnClickListener {
+            navigateTo(R.id.action_navigation_profile_to_navigation_auth)
         }
 
-        locationText.setOnClickListener {
+        binding.profileLocationText.setOnClickListener {
             checkLocation()
+        }
+
+        binding.toEventsView.setOnClickListener {
+            navigateTo(R.id.action_navigation_profile_to_navigation_user_events)
         }
 
         vm.location.observe(viewLifecycleOwner) {
             if (it != null) {
-                locationText.text = it.latitude.toString() + " " + it.longitude.toString()
+                binding.profileLocationText.text = it.latitude.toString() + " " + it.longitude.toString()
             }
         }
 
-        return root
     }
 
     override fun onResume() {
@@ -95,10 +100,10 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
-    private fun openAuthView() {
-        requireActivity()
+    private fun navigateTo(resourceId: Int) {
+        val navController = requireActivity()
             .findNavController(R.id.nav_host_fragment_activity_main)
-            .navigate(R.id.action_navigation_profile_to_navigation_auth)
+        navController.navigate(resourceId)
     }
 
     private fun checkLocation() {

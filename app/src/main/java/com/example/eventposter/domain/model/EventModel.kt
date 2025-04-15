@@ -7,6 +7,8 @@ data class EventModel(
      val name: String,
      val address: String,
      val startDate: Date,
-     val endDate: Date,
-     val posterUrl: String?
+     val endDate: Date?,
+     val posterUrl: String?,
+     val keywords: List<String> = listOf(),
+     val price: Double = 0.00
 )

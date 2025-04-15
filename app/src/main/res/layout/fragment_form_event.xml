@@ -1,283 +1,302 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:orientation="vertical"
+    android:paddingBottom="56dp">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/ivBackUserEvents"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_arrow_back_24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"/>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:fillViewport="true">
 
-        <!-- Название мероприятия -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="8dp">
+            android:padding="16dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Название мероприятия"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:hint="Введите название"
-                android:background="@drawable/edittext_background"
-                android:padding="12dp"
-                android:layout_marginTop="8dp" />
-        </LinearLayout>
-
-        <!-- Адрес проведения -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="16dp"
-            android:paddingTop="8dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Адрес проведения"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPostalAddress"
-                android:hint="Введите адрес"
-                android:background="@drawable/edittext_background"
-                android:padding="12dp"
-                android:layout_marginTop="8dp" />
-        </LinearLayout>
-
-        <!-- Дата начала -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="16dp"
-            android:paddingTop="8dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Дата начала"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
-
+            <!-- Название мероприятия -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="-5dp"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/btnStartDatePickerForm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_calendar_month_24dp" />
+                android:orientation="vertical"
+                android:paddingTop="8dp">
 
                 <TextView
-                    android:id="@+id/tvStartDateEventForm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Не выбрано"
-                    android:gravity="center"
-                    android:textSize="16sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Дата окончания -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="16dp"
-            android:paddingTop="8dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Дата окончания"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="-5dp"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/btnEndDatePickerForm"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_calendar_month_24dp" />
-
-                <TextView
-                    android:id="@+id/tvEndDateEventForm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Не выбрано"
-                    android:gravity="center"
-                    android:textSize="16sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Цена -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="16dp"
-            android:paddingTop="8dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Цена"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp"
-                android:baselineAligned="true">
+                    android:text="Название мероприятия"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
 
                 <EditText
-                    android:id="@+id/etPrice"
-                    android:layout_width="0dp"
+                    android:id="@+id/etFormName"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Введите сумму"
-                    android:inputType="numberDecimal"
-                    android:imeOptions="actionDone"
-                    android:background="@drawable/edittext_background"
-                    android:padding="12dp" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Ключевые слова -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="16dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ключевые слова"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:singleLine="false"
-                app:chipSpacing="8dp"
-                app:selectionRequired="false" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp"
-                android:baselineAligned="false">
-
-                <EditText
-                    android:id="@+id/etKeywords"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Введите ключевые слова"
-                    android:imeOptions="actionDone"
                     android:inputType="textCapWords"
-                    android:maxLines="1"
+                    android:hint="Введите название"
                     android:background="@drawable/edittext_background"
-                    android:padding="12dp" />
-
-                <ImageButton
-                    android:id="@+id/btnAddKeyword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_add_24dp"
-                    android:layout_marginStart="8dp" />
+                    android:padding="12dp"
+                    android:layout_marginTop="8dp" />
             </LinearLayout>
-        </LinearLayout>
 
-        <!-- Загрузка изображений -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Добавьте изображения"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingVertical="8dp">
-
+            <!-- Адрес проведения -->
             <LinearLayout
-                android:id="@+id/imageContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:orientation="horizontal"
-                android:paddingEnd="16dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:paddingTop="8dp">
 
-                <!-- Кнопка добавления фото -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btnAddImage"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="16dp"
-                    app:strokeColor="@color/material_on_surface_stroke"
-                    app:strokeWidth="1dp"
-                    android:clickable="true"
-                    android:focusable="true">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Адрес проведения"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:src="@drawable/ic_image_24dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Добавить"
-                            android:textSize="12sp"
-                            android:layout_marginTop="8dp" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                <EditText
+                    android:id="@+id/etFormAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPostalAddress"
+                    android:hint="Введите адрес"
+                    android:background="@drawable/edittext_background"
+                    android:padding="12dp"
+                    android:layout_marginTop="8dp" />
             </LinearLayout>
-        </HorizontalScrollView>
 
-        <!-- Кнопка сохранения -->
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Сохранить"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="@color/design_default_color_primary"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="16dp" />
+            <!-- Дата начала -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:paddingTop="8dp">
 
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Дата начала"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-5dp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btnStartDatePickerForm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_calendar_month_24dp" />
+
+                    <TextView
+                        android:id="@+id/tvStartDateEventForm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Не выбрано"
+                        android:gravity="center"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Дата окончания -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Дата окончания"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-5dp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btnEndDatePickerForm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_calendar_month_24dp" />
+
+                    <TextView
+                        android:id="@+id/tvEndDateEventForm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Не выбрано"
+                        android:gravity="center"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Цена -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Цена"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:baselineAligned="true">
+
+                    <EditText
+                        android:id="@+id/etFormPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Введите сумму"
+                        android:inputType="numberDecimal"
+                        android:digits="0123456789."
+                        android:imeOptions="actionDone"
+                        android:background="@drawable/edittext_background"
+                        android:padding="12dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Ключевые слова -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ключевые слова"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/fbFormKeywords"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:flexWrap="wrap"
+                    app:alignItems="flex_start"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:baselineAligned="false">
+
+                    <EditText
+                        android:id="@+id/etFormKeywords"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Введите ключевые слова"
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"
+                        android:background="@drawable/edittext_background"
+                        android:padding="12dp" />
+
+                    <ImageButton
+                        android:id="@+id/btnAddKeyword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_add_24dp"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Загрузка изображений -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Добавьте изображения"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingVertical="8dp">
+
+                <LinearLayout
+                    android:id="@+id/imageContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:orientation="horizontal"
+                    android:paddingEnd="16dp">
+
+                    <!-- Кнопка добавления фото -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btnAddImage"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="16dp"
+                        app:strokeColor="@color/material_on_surface_stroke"
+                        app:strokeWidth="1dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:src="@drawable/ic_image_24dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Добавить"
+                                android:textSize="12sp"
+                                android:layout_marginTop="8dp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Кнопка сохранения -->
+            <Button
+                android:id="@+id/btnSaveFormEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Сохранить"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/design_default_color_primary"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
