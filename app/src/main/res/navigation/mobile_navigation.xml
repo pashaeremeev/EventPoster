@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_navigation_profile_to_navigation_user_events"
             app:destination="@id/navigation_user_events" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_stat"
+            app:destination="@id/navigation_statistic" />
     </fragment>
 
     <fragment
@@ -75,6 +78,17 @@
         <action
             android:id="@+id/action_navigation_user_events_to_navigation_form_event"
             app:destination="@id/navigation_form_event"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_statistic"
+        android:name="com.example.eventposter.app.ui.StatisticFragment"
+        tools:layout="@layout/fragment_statistic">
+        <action
+            android:id="@+id/action_navigation_stat_to_navigation_profile"
+            app:destination="@id/navigation_profile"
+            app:popUpTo="@id/navigation_profile"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment

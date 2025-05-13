@@ -10,7 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
 import com.example.eventposter.R
+import com.example.eventposter.app.ui.adapters.recycler.FeedbackAdapter
 import com.example.eventposter.databinding.FragmentEventCardBinding
 import kotlinx.coroutines.launch
 
@@ -25,7 +27,7 @@ class EventCardFragment : Fragment() {
     }
 
     private lateinit var vm: EventCardViewModel
-    private var idEvent: Int? = null
+    private var eventId: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,8 +37,8 @@ class EventCardFragment : Fragment() {
 
         _binding = FragmentEventCardBinding.inflate(inflater, container, false)
 
-        idEvent = requireArguments().getInt(EVENT_CARD)
-        idEvent?.let { vm.setEventId(it) }
+        eventId = requireArguments().getInt(EVENT_CARD)
+        eventId?.let { vm.setEventId(it) }
 
         return binding.root
     }
@@ -49,12 +51,29 @@ class EventCardFragment : Fragment() {
                 vm.event.collect { event ->
                     binding.tvEventName.text = event?.name
                     binding.tvEventLocation.text = event?.address
+
+                    Glide.with(requireContext())
+                        .load(event?.posterUrl)
+                        .error(R.drawable.ic_image_not_supported_24dp)
+                        .centerCrop()
+                        .into(binding.ivEventCardPoster)
                 }
             }
         }
 
         binding.ivBackEventCard.setOnClickListener {
             removeFragment()
+        }
+
+        val fbAdapter = FeedbackAdapter(listOf())
+        binding.rvPreviewFeedbacks.adapter = fbAdapter
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.feedbacks.collect { feedbacks ->
+                    fbAdapter.setFeedbacks(feedbacks)
+                }
+            }
         }
 
 //        val adapter = ImageSliderAdapter(
@@ -68,6 +87,11 @@ class EventCardFragment : Fragment() {
         requireActivity()
             .findNavController(R.id.nav_host_fragment_activity_main)
             .popBackStack()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

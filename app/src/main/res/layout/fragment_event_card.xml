@@ -28,6 +28,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/ivEventCardPoster"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:src="@drawable/zaliv"
+                android:layout_margin="10dp"/>
+
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vpEventImages"
                 android:layout_width="match_parent"
@@ -35,7 +42,8 @@
                 android:layout_margin="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tvEventName"
@@ -182,10 +190,12 @@
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvFeedbacks"
+                android:id="@+id/rvPreviewFeedbacks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_feedback"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"/>

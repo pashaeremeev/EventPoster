@@ -9,6 +9,11 @@ import java.util.Locale
 fun String.toEditable() : Editable =
         Editable.Factory.getInstance().newEditable(this)
 
+fun Date.getFormattedDate(): String {
+        val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        return sdf.format(this)
+}
+
 fun TextView.displayDate(date: Date) {
         val fmt = SimpleDateFormat("d MMMM yyyy", Locale("ru", "RU"))
         text = fmt.format(date)

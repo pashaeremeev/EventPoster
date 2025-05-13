@@ -80,6 +80,10 @@ class ProfileFragment : Fragment() {
             navigateTo(R.id.action_navigation_profile_to_navigation_user_events)
         }
 
+        binding.toManageEventsView.setOnClickListener {
+            navigateTo(R.id.action_navigation_profile_to_navigation_stat)
+        }
+
         vm.location.observe(viewLifecycleOwner) {
             if (it != null) {
                 binding.profileLocationText.text = it.latitude.toString() + " " + it.longitude.toString()

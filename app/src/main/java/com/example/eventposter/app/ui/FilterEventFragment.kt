@@ -42,17 +42,6 @@ class FilterEventFragment: FilterFragment() {
 
         updateDates()
 
-        // Категории
-        binding.checkboxConcert.setOnCheckedChangeListener { _, isChecked ->
-            currentFilter.categories["concert"] = isChecked
-        }
-
-        // Цена
-        /*binding.priceSlider.addOnChangeListener { slider, _, _ ->
-            currentFilter.minPrice = slider.values[0]
-            currentFilter.maxPrice = slider.values[1]
-        }*/
-
         // Сброс
         binding.btnResetEventFilter.setOnClickListener {
             resetFilter()
