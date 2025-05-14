@@ -8,13 +8,15 @@ data class FeedbackModel (
     val date: Date,
     val rating: Float,
     val text: String,
-    val eventId: Int
+    val eventId: Int,
+    val isAnonymous: Boolean = false
 ) {
     fun toData(): Feedback = Feedback(
         userName = userName,
         date = date,
         rating = rating,
         text = text,
-        eventId = eventId
+        eventId = eventId,
+        isAnonymous = isAnonymous
     )
 }

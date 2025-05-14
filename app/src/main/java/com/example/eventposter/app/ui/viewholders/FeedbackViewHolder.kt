@@ -17,10 +17,9 @@ class FeedbackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val tvReviewText: TextView = itemView.findViewById(R.id.tvPreviewFeedbackUserText)
 
     fun bind(feedback: FeedbackModel) {
-        tvUserName.text = feedback.userName
+        tvUserName.text =  if (feedback.isAnonymous) "Аноним" else feedback.userName
         tvDate.text = feedback.date.getFormattedDate()
         ratingBar.rating = feedback.rating
         tvReviewText.text = feedback.text
-
     }
 }

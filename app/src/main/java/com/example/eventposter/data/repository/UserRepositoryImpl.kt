@@ -38,5 +38,9 @@ class UserRepositoryImpl: UserRepository {
         }
     }
 
+    override fun getUserById(id: Int): UserModel? {
+        return storage.getUserById(id)?.toModel()
+    }
+
 
 }

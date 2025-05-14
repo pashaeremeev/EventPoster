@@ -11,4 +11,6 @@ interface UserRepository {
     fun getUserFlowById(id: Flow<Int>): Flow<UserModel?>
 
     fun getUsersFlowByFilter(filter: Flow<FilterUserModel>): Flow<List<UserModel>>
+
+    fun getUserById(id: Int): UserModel?
 }

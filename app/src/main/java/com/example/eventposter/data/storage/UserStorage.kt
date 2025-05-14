@@ -21,13 +21,13 @@ class UserStorage {
     private val users = listOf(
         User(
             id = 1,
-            name = "User1",
+            name = "Павел Еремеев",
             urlIcon = "https://sun1-96.userapi.com/s/v1/ig2/KBdKwastFMxQ6k9HdHl49wD7UiUinUcoVb9_800NfAZ8r_Cg8u-XW-gFmwh5w3-CCc_pNwohVgs4RNp3FrsFytHV.jpg?quality=95&crop=848,251,801,801&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720&ava=1&u=7NUvYU647bCq1G90YX55vnE2uy41oZLGPnZVWOwtDqI&cs=200x200",
             age = 18
         ),
         User(
             id = 2,
-            name = "User2",
+            name = "Егор Краснов",
             urlIcon = "https://sun1-28.userapi.com/s/v1/ig2/3nWI2TmzQM-aqZ5tCQRDYfj_al1xbOwhEzfCRQw6nYe6KKpYCh-LvatYpp_jv09aJCNmQrXL7naVrZSgCy34Qhjt.jpg?quality=95&crop=0,2,1077,1077&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720&ava=1&cs=50x50",
             age = 17
         )
@@ -55,5 +55,9 @@ class UserStorage {
             return@combine result
         }
         return result
+    }
+
+    fun getUserById(userId: Int): User? {
+        return users.firstOrNull{ it.id == userId }
     }
 }

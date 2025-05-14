@@ -23,6 +23,7 @@ class EventCardFragment : Fragment() {
 
     companion object {
         private const val EVENT_CARD = "EVENT_CARD"
+        private const val FB_DIALOG_TAG = "FB_DIALOG_TAG"
         fun newInstance() = EventCardFragment()
     }
 
@@ -72,8 +73,13 @@ class EventCardFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 vm.feedbacks.collect { feedbacks ->
                     fbAdapter.setFeedbacks(feedbacks)
+                    fbAdapter.notifyDataSetChanged()
                 }
             }
+        }
+
+        binding.btnCreateFeedback.setOnClickListener {
+            openFeedbackForm()
         }
 
 //        val adapter = ImageSliderAdapter(
@@ -92,6 +98,11 @@ class EventCardFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun openFeedbackForm() {
+        val fragment = eventId?.let { FormFeedbackFragment.newInstance(it) }
+        fragment?.show(parentFragmentManager, FB_DIALOG_TAG)
     }
 
 }
