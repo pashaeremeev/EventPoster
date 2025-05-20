@@ -1,6 +1,6 @@
 package com.example.eventposter.domain.model
 
-import com.example.eventposter.app.ui.FilterModel
+import com.example.eventposter.app.ui.fragment.FilterModel
 import com.example.eventposter.data.FilterUser
 
 data class FilterUserModel(

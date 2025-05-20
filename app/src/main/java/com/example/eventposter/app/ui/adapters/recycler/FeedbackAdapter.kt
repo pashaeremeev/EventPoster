@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eventposter.R
-import com.example.eventposter.app.ui.viewholders.FeedbackViewHolder
+import com.example.eventposter.app.ui.viewholder.FeedbackViewHolder
 import com.example.eventposter.domain.model.FeedbackModel
 
 class FeedbackAdapter(

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eventposter.R
 import com.example.eventposter.app.CalendarClickListener
-import com.example.eventposter.app.ui.viewholders.CalendarDayViewHolder
+import com.example.eventposter.app.ui.viewholder.CalendarDayViewHolder
 import java.text.SimpleDateFormat
 import java.util.Date
 

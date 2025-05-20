@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.eventposter.R
-import com.example.eventposter.app.ui.viewholders.ImageSliderViewHolder
+import com.example.eventposter.app.ui.viewholder.ImageSliderViewHolder
 
 class ImageSliderAdapter(
     private val context: Context,

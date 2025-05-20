@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.eventposter.app.Searchable
-import com.example.eventposter.app.ui.FilterModel
+import com.example.eventposter.app.ui.fragment.FilterModel
 
 class PageAdapter
 (

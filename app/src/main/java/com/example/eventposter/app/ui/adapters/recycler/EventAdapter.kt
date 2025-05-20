@@ -3,15 +3,13 @@ package com.example.eventposter.app.ui.adapters.recycler
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.eventposter.R
 import com.example.eventposter.app.EventClickListener
 import com.example.eventposter.app.diffutils.EventDiffUtilCallback
-import com.example.eventposter.app.ui.viewholders.EventHolder
+import com.example.eventposter.app.ui.viewholder.EventHolder
 import com.example.eventposter.domain.model.EventModel
 
 class EventAdapter(

@@ -1,6 +1,6 @@
 package com.example.eventposter.app
 
-import com.example.eventposter.app.ui.FilterModel
+import com.example.eventposter.app.ui.fragment.FilterModel
 
 interface Searchable {
 

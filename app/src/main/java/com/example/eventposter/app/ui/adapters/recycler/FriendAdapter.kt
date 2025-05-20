@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.eventposter.R
 import com.example.eventposter.app.diffutils.UserDiffUtilCallback
-import com.example.eventposter.app.ui.viewholders.FriendHolder
+import com.example.eventposter.app.ui.viewholder.FriendHolder
 import com.example.eventposter.domain.model.UserModel
 
 class FriendAdapter(
