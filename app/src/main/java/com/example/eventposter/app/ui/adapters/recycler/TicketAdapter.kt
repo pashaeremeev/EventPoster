@@ -5,15 +5,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.eventposter.R
+import com.example.eventposter.app.TicketClickListener
 import com.example.eventposter.app.diffutils.UserDiffUtilCallback
-import com.example.eventposter.app.ui.viewholder.FriendHolder
+import com.example.eventposter.app.ui.viewholder.TicketViewHolder
 import com.example.eventposter.domain.model.UserModel
 
-class FriendAdapter(
-    private val context: Context
-): RecyclerView.Adapter<FriendHolder?>() {
+class TicketAdapter(
+    private val context: Context,
+    private val clickListener: TicketClickListener
+): RecyclerView.Adapter<TicketViewHolder?>() {
 
     private var friends = listOf<UserModel>()
 
@@ -26,10 +27,10 @@ class FriendAdapter(
         return DiffUtil.calculateDiff(diff)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendHolder {
-        return FriendHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketViewHolder {
+        return TicketViewHolder(
             LayoutInflater.from(context)
-                .inflate(R.layout.item_user_search, parent, false)
+                .inflate(R.layout.item_ticket_search, parent, false)
         )
     }
 
@@ -37,13 +38,11 @@ class FriendAdapter(
         return friends.size
     }
 
-    override fun onBindViewHolder(holder: FriendHolder, position: Int) {
+    override fun onBindViewHolder(holder: TicketViewHolder, position: Int) {
         val friend = friends[position]
         holder.getUserNameText().text = friend.name
-        Glide.with(context)
-            .load(friend.urlIcon)
-            .error(R.drawable.ic_image_not_supported_24dp)
-            .into(holder.getProfileIcon())
+        holder.itemView.setOnClickListener { clickListener.invoke() }
+        //holder.getEventNameText().text = ticket.event.name
     }
 
 }

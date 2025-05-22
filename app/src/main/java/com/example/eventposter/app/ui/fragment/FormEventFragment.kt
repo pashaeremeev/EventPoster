@@ -147,7 +147,6 @@ class FormEventFragment : Fragment() {
                 }
             }
 
-            // Обработка цены
             val price = try {
                 priceText.toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
             } catch (e: Exception) {
@@ -155,7 +154,6 @@ class FormEventFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            // Создание объекта события
             val event = EventModel(
                 id = eventId ?: 0,
                 name = name,
@@ -167,12 +165,11 @@ class FormEventFragment : Fragment() {
                 keywords = keywords
             )
 
-            // Сохранение через ViewModel
             vm.saveEvent(event)
         }
 
         binding.ivBackUserEvents.setOnClickListener {
-            navigateTo(R.id.action_navigation_form_event_to_navigation_user_events)
+            toLastFragment()
         }
 
     }
@@ -189,10 +186,10 @@ class FormEventFragment : Fragment() {
         private const val EVENT_ID = "EVENT_ID"
     }
 
-    private fun navigateTo(resourceId: Int) {
+    private fun toLastFragment() {
         val navController = requireActivity()
             .findNavController(R.id.nav_host_fragment_activity_main)
-        navController.navigate(resourceId)
+        navController.popBackStack()
     }
 
 }

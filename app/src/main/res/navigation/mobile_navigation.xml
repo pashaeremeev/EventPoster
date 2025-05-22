@@ -82,6 +82,9 @@
         <action
             android:id="@+id/action_navigation_user_events_to_navigation_scan"
             app:destination="@id/navigation_scan"/>
+        <action
+            android:id="@+id/action_navigation_user_events_to_navigation_ticket"
+            app:destination="@id/navigation_ticket"/>
     </fragment>
 
     <fragment
@@ -112,6 +115,15 @@
         tools:layout="@layout/fragment_qr_scanner">
         <action
             android:id="@+id/action_navigation_scan_to_navigation_user_events"
+            app:destination="@id/navigation_user_events"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_ticket"
+        android:name="com.example.eventposter.app.ui.fragment.TicketFragment"
+        tools:layout="@layout/fragment_ticket">
+        <action
+            android:id="@+id/action_navigation_scan_to_navigation_ticket"
             app:destination="@id/navigation_user_events"/>
     </fragment>
 

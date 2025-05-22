@@ -10,7 +10,7 @@
         android:id="@+id/rvFriendsSearchResult"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_user_search"
+        tools:listitem="@layout/item_ticket_search"
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"/>
 

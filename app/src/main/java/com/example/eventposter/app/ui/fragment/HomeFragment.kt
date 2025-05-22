@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.eventposter.R
 import com.example.eventposter.app.CalendarClickListener
 import com.example.eventposter.app.EventClickListener
+import com.example.eventposter.app.displayDate
 import com.example.eventposter.app.ui.adapters.recycler.CalendarAdapter
 import com.example.eventposter.app.ui.adapters.recycler.EventAdapter
 import com.example.eventposter.app.ui.viewmodel.HomeViewModel
@@ -80,12 +81,12 @@ class HomeFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 vm.selectedDate.collect { date ->
                     adapterCalendar.setSelected(date)
-                    displayDate(date)
+                    binding.tvDate.displayDate(date)
                 }
             }
         }
 
-        displayDate(Calendar.getInstance().time)
+        binding.tvDate.displayDate(Calendar.getInstance().time)
 
         vm.days.observe(viewLifecycleOwner) { days ->
             adapterCalendar.days = days
@@ -140,11 +141,6 @@ class HomeFragment : Fragment() {
             }
             binding.tvMonthYear.text = strMonthYear
         }
-    }
-
-    private fun displayDate(date: Date) {
-        val fmt = SimpleDateFormat("d MMMM yyyy", Locale("ru", "RU"))
-        binding.tvDate.text = fmt.format(date)
     }
 
     private fun clickOnEventView(event: EventModel) {

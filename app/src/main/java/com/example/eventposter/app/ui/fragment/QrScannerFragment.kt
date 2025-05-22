@@ -1,19 +1,15 @@
 package com.example.eventposter.app.ui.fragment
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
-import android.hardware.camera2.CameraManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.budiyev.android.codescanner.CodeScanner

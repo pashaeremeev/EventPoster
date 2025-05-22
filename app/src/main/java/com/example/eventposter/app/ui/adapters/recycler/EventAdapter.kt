@@ -9,13 +9,13 @@ import com.bumptech.glide.Glide
 import com.example.eventposter.R
 import com.example.eventposter.app.EventClickListener
 import com.example.eventposter.app.diffutils.EventDiffUtilCallback
-import com.example.eventposter.app.ui.viewholder.EventHolder
+import com.example.eventposter.app.ui.viewholder.EventViewHolder
 import com.example.eventposter.domain.model.EventModel
 
 class EventAdapter(
     private val context: Context,
     private val clickListener: EventClickListener
-): RecyclerView.Adapter<EventHolder?>() {
+): RecyclerView.Adapter<EventViewHolder?>() {
 
     private var events: List<EventModel> = listOf()
 
@@ -25,8 +25,8 @@ class EventAdapter(
         return DiffUtil.calculateDiff(diff)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventHolder {
-        return EventHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
+        return EventViewHolder(
             LayoutInflater.from(context)
                 .inflate(R.layout.item_event_preview, parent, false)
         )
@@ -34,7 +34,7 @@ class EventAdapter(
 
     override fun getItemCount(): Int = events.size
 
-    override fun onBindViewHolder(holder: EventHolder, position: Int) {
+    override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val event = events[position]
         holder.bind(event)
         Glide.with(context)

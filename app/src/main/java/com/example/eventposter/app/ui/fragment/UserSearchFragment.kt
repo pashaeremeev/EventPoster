@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
+import com.example.eventposter.R
 import com.example.eventposter.app.Searchable
-import com.example.eventposter.app.ui.adapters.recycler.FriendAdapter
+import com.example.eventposter.app.TicketClickListener
+import com.example.eventposter.app.ui.adapters.recycler.TicketAdapter
 import com.example.eventposter.app.ui.viewmodel.UserSearchViewModel
 import com.example.eventposter.databinding.FragmentSearchUserBinding
 import com.example.eventposter.domain.model.FilterUserModel
@@ -48,7 +51,11 @@ class UserSearchFragment : Fragment(), Searchable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = FriendAdapter(requireContext())
+        val adapter = TicketAdapter(requireContext(), object : TicketClickListener {
+            override fun invoke() {
+                clickOnTicketView()
+            }
+        })
 
         binding.rvFriendsSearchResult.adapter = adapter
 
@@ -77,5 +84,11 @@ class UserSearchFragment : Fragment(), Searchable {
         if (::vm.isInitialized) {
             vm.updateFilter{ copy(name = newText) }
         }
+    }
+
+    private fun clickOnTicketView() {
+        requireActivity()
+            .findNavController(R.id.nav_host_fragment_activity_main)
+            .navigate(R.id.action_navigation_user_events_to_navigation_ticket)
     }
 }

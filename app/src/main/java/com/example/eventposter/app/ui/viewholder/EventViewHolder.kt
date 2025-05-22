@@ -9,7 +9,7 @@ import com.example.eventposter.domain.model.EventModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class EventHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class EventViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     private var posterPreviewImage: ImageView
     private val posterPreviewEventNameText: TextView

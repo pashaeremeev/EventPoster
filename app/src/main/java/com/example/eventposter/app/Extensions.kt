@@ -15,6 +15,6 @@ fun Date.getFormattedDate(): String {
 }
 
 fun TextView.displayDate(date: Date) {
-        val fmt = SimpleDateFormat("d MMMM yyyy", Locale("ru", "RU"))
+        val fmt = SimpleDateFormat("d MMMM yyyy HH:mm", Locale("ru", "RU"))
         text = fmt.format(date)
 }

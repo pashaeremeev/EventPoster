@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.example.eventposter.app.displayDate
 import com.example.eventposter.databinding.FragmentEventFilterBinding
 import com.example.eventposter.domain.model.FilterEventModel
@@ -24,6 +25,7 @@ class FilterEventFragment: FilterFragment() {
     companion object {
         private var fragment: FilterEventFragment? = null
         private const val DATE_PICKER = "DATE_PICKER"
+        private const val TIME_PICKER = "TIME_PICKER"
         fun getInstance(): FilterEventFragment {
             if (fragment == null) {
                 fragment = FilterEventFragment()
@@ -42,13 +44,21 @@ class FilterEventFragment: FilterFragment() {
 
         updateDates()
 
-        // Сброс
+
         binding.btnResetEventFilter.setOnClickListener {
             resetFilter()
         }
 
-        // Применить
         binding.btnApplyEventFilter.setOnClickListener {
+            if (!(currentFilter.endDate?.after(currentFilter.startDate) == true
+                || currentFilter.endDate == null)) {
+                Toast.makeText(
+                    context,
+                    "Конец диапазона раньше начала.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
             onFilterApplied?.invoke(currentFilter)
             dismiss()
         }
