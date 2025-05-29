@@ -4,15 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import com.example.eventposter.app.displayDate
 import com.example.eventposter.databinding.FragmentEventFilterBinding
 import com.example.eventposter.domain.model.FilterEventModel
-import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
-import java.util.Locale
 
 class FilterEventFragment: FilterFragment() {
 
@@ -42,8 +38,13 @@ class FilterEventFragment: FilterFragment() {
 
         _binding = FragmentEventFilterBinding.inflate(inflater, container, false)
 
-        updateDates()
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        updateDates()
 
         binding.btnResetEventFilter.setOnClickListener {
             resetFilter()
@@ -51,7 +52,7 @@ class FilterEventFragment: FilterFragment() {
 
         binding.btnApplyEventFilter.setOnClickListener {
             if (!(currentFilter.endDate?.after(currentFilter.startDate) == true
-                || currentFilter.endDate == null)) {
+                        || currentFilter.endDate == null)) {
                 Toast.makeText(
                     context,
                     "Конец диапазона раньше начала.",
@@ -68,7 +69,7 @@ class FilterEventFragment: FilterFragment() {
             datePicker.show(parentFragmentManager, DATE_PICKER)
             datePicker.setListener { date ->
                 currentFilter.startDate = date
-                binding.tvStartDateEventFilter.displayDate(date)
+                updateDates()
             }
         }
 
@@ -76,12 +77,13 @@ class FilterEventFragment: FilterFragment() {
             val datePicker = DatePickerFragment()
             datePicker.show(parentFragmentManager, DATE_PICKER)
             datePicker.setListener { date ->
+
+
+
                 currentFilter.endDate = date
-                binding.tvEndDateEventFilter.displayDate(date)
+                updateDates()
             }
         }
-
-        return binding.root
     }
 
     private fun resetFilter() {
@@ -90,22 +92,13 @@ class FilterEventFragment: FilterFragment() {
         updateDates()
     }
 
-    private fun displayDate(view: TextView, date: Date) {
-        val fmt = SimpleDateFormat("d MMMM yyyy", Locale("ru", "RU"))
-        view.text = fmt.format(date)
-    }
-
     private fun updateDates() {
-        displayDate(
-            view = binding.tvStartDateEventFilter,
-            date = currentFilter.startDate
-        )
+        binding.tvStartDateEventFilter.displayDate(currentFilter.startDate)
 
-        currentFilter.endDate?.let {
-            displayDate(
-                view = binding.tvEndDateEventFilter,
-                date = it
-            )
+        if (currentFilter.endDate != null) {
+            binding.tvEndDateEventFilter.displayDate(currentFilter.endDate!!)
+        } else {
+            binding.tvEndDateEventFilter.text = "Не выбрано"
         }
     }
 

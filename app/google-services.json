@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "986373092580",
+    "project_id": "eventposter-ff34a",
+    "storage_bucket": "eventposter-ff34a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986373092580:android:cc288e27129f34b09be8f1",
+        "android_client_info": {
+          "package_name": "com.example.eventposter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyhgjS3WY_DSuomjwLLmbUkjqDc3DLwAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
